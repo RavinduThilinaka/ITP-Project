@@ -1,0 +1,300 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	font-family:"uppercase";
+	
+}
+
+.body{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	min-height:100vh;
+	background: rgba(100, 211, 122, 0.6);
+	background-image: url("/public/image/TeaLeaf6.jpg");
+	background-position: center;
+	background-size: cover;
+	
+
+}
+
+.box{
+	position:relative;
+	width:470px;
+	height:560px;
+	background:#1c1c1c72;
+	border-radius:8px;
+	overflow: hidden;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.941);
+   
+	
+}
+
+.box form i h2 {
+    animation: iconAnimation 1s linear infinite;
+}
+
+@keyframes iconAnimation {
+    0% {
+        transform: scale(1.5);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.5);
+    }
+}
+
+
+.box::before{
+	
+	position:absolute;
+	width:470px;
+	height:560px;
+	top:-50%;
+	left:-50%;
+	background:linear-gradient(0deg,transparent,
+	transparent,#17e114,#17e114,#17e114);
+	z-index: 1;
+	transform-origin: bottom right;
+	animation: animate 6s linear infinite;
+}
+
+.box::after{
+	
+	position:absolute;
+	width:470px;
+	height:560px;
+	top:-50%;
+	left:-50%;
+	background:linear-gradient(0deg,transparent,
+	transparent,lime,lime,lime);
+	z-index: 1;
+	transform-origin: bottom right;
+	animation: animate 6s linear infinite;
+	animation-delay: -3s;
+}
+.borderLine{
+	position: absolute;
+	top: 0;
+	inset: 0;
+
+}
+
+.borderLine::before{
+	content:'';
+	position:absolute;
+	width:470px;
+	height:560px;
+	top:-50%;
+	left:-50%;
+	background:linear-gradient(0deg,transparent,
+	transparent,lime,lime,lime);
+	z-index: 1;
+	transform-origin: bottom right;
+	animation: animate 6s linear infinite;
+	animation-delay: -1.5s;
+}
+
+.borderLine::after{
+	content:'';
+	position:absolute;
+	width:470px;
+	height:560px;
+	top:-50%;
+	left:-50%;
+	background:linear-gradient(0deg,transparent,
+	transparent,lime,lime,lime);
+	z-index: 1;
+	transform-origin: bottom right;
+	animation: animate 6s linear infinite;
+	animation-delay: -4.5s;
+}
+@keyframes animate {
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
+.box form{
+	
+	position:absolute;
+	inset:4px;
+	background:#e0edbd;
+	background-image: url("/public/image/TeaLeaf_Login.png");
+	background-position: center;
+	background-size: cover;
+	padding:50px 40px;
+	border-radius:8px;
+	z-index:2;
+	display:flex;
+	flex-direction:column;
+	
+}
+
+.box h2{
+	color:#3d3d3d;
+	font-weight:500px;
+	text-align:center;
+	letter-spacing:0.1em;
+	font-size:35px;
+	
+}
+
+.loginInput{
+    
+    height: 40px;
+    background-color:#fff;
+    margin: 10px 0;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+	width:100%;
+	margin-top: 35px;
+	
+
+}
+.loginInput i{
+    flex: 0.5;
+    text-align: center;
+    color: #666;
+    font-size: 18px;
+}
+
+.loginInput input{
+    flex: 5;
+	background-color:#fff;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+	height:38px;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	
+}
+
+
+.loginInput input:hover{
+   cursor: pointer;
+}
+
+
+
+.inputBox i{
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:100%;
+	height:2px;
+	background:#fff;
+	border-radius:4px;
+	overflow:hidden;
+	transform:0.5s;
+	pointer-events:none;
+	
+}
+
+
+.links{
+	display:flex;
+	justify-content:space-between;
+	
+}
+
+.links a{
+	margin:10px 0;
+	font-size:0.85em;
+	color:#8f8f8f;
+	text-decoration:none;
+}
+
+.links a:hover{
+	color:#fff;
+}
+
+.loginBtn button{
+	display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background-color: #16f312; 
+    border: 2px solid #29ca17; 
+    border-radius: 25px;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-left: 38%;
+    
+
+}
+
+.loginBtn button:hover{
+	background-color: #28c117; 
+    border-color: #f3fff1; 
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+   
+}
+
+.user img{
+	width: 160px;
+	height: 160px;
+	margin-left: 28%;
+	color:#383d52
+}
+
+
+.Animation{
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    font-family:uppercase;
+    color:#ffffff;
+    font-size: 100px;
+	font-weight: 500;
+	border-radius: 35px 0px ;
+	-webkit-text-stroke:0.2vw rgba(0, 0, 0, 0.147);
+	visibility:hidden;
+	
+}
+
+.Animation::before{
+	
+	opacity:0.2;
+	content: attr(data-text);
+	position:absolute;
+	height:100%;
+	color:rgb(255, 255, 255);
+	-webkit-text-stroke:0.1vw #383d52;
+	overflow: hidden;
+	animation: login 6s linear infinite;
+	visibility:visible;
+	
+}
+
+@keyframes login{
+
+	0%,10%,100%
+	{
+		width: 0;
+	}
+
+	70%,90%
+	{
+		width: 100%;
+	}
+}
+

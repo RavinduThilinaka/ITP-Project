@@ -1,0 +1,110 @@
+.qulityDashboard {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.QAtable_container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.QAtable_container_2 {
+    overflow-x: auto;
+}
+
+.QATableHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.QATableHeader h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.QAsearch_box {
+    display: flex;
+    align-items: center;
+}
+
+.QAsearch_box input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    width: 200px;
+    transition: all 0.3s ease;
+}
+
+.QAsearch_box input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.QAsearch_box ion-icon {
+    margin-left: -30px;
+    color: #007bff;
+}
+
+.QAbtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.QAbtn:hover {
+    background-color: #0056b3;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table thead th {
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tbody td {
+    padding: 15px;
+    color: #333;
+}
+
+.table tbody td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.table tbody td a:hover {
+    text-decoration: underline;
+}
+
+@media print {
+    .noPrint {
+      display: none;
+    }
+  }

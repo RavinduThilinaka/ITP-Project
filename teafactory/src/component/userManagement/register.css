@@ -1,0 +1,275 @@
+
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	font-family:"uppercase";
+	
+}
+
+.body{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'uppercase';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+	background-position: center;
+	background-size: cover;
+	background-image: url("/public/image/TeaLeaf6.jpg");
+	background-position: center;
+	background-size: cover;
+}
+
+.registerContainer{
+	position: relative;
+    width: 70vw;
+    height: 80vh;
+    background: #1c1c1c;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
+	
+}
+
+.registerContainer form i h2 {
+    animation: iconAnimation 1s linear infinite;
+}
+
+@keyframes iconAnimation {
+    0% {
+        transform: scale(1.5);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.5);
+    }
+}
+
+
+#pwdErr1,#pwdErr2{
+	margin-left: 15%;
+	margin-top: 45px;
+}
+
+p{
+	margin-left: 12%;
+	width:200px;
+}
+/*border animation*/
+
+
+.SignupBorder{
+	position: absolute;
+	top: 0;
+	inset: 0;
+
+}
+
+.SignupBorder::before{
+	content:'';
+	position:absolute;
+	width: 70vw;
+    height: 80vh;
+	top:-50%;
+	left:-50%;
+	background:linear-gradient(0deg,transparent,
+	transparent,lime,lime,lime);
+	z-index: 1;
+	transform-origin: bottom right;
+	animation: animate 6s linear infinite;
+	animation-delay: -1.5s;
+}
+
+.SignupBorder::after{
+	content:'';
+	position:absolute;
+	width: 70vw;
+    height: 80vh;
+	top:-50%;
+	left:-50%;
+	background:linear-gradient(0deg,transparent,
+	transparent,lime,lime,lime);
+	z-index: 1;
+	transform-origin: bottom right;
+	animation: animate 6s linear infinite;
+	animation-delay: -4.5s;
+}
+@keyframes animate {
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+/*----------------------------------------------------------------------------------*/
+.registerContainer form{
+	
+	position: absolute;
+    inset: 4px;
+	background-image: url("/public/image/TeaLeaf5_Login.png");
+	background-position: center;
+	background-size: cover;
+    padding: 50px 40px;
+    border-radius: 8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	background-color: #e0edbd;
+	
+}
+
+.registerContainer h2{
+	color: #3d3d3d;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+	font-family: 'Nunito', serif;;
+	
+}
+
+
+.registerContainer span{
+	position:absolute;
+	left:0;
+	padding:20px 0px 10px;
+	pointer-events:none;
+	color:#8f8f8f;
+	font-size:1em;
+	letter-spacing:0.05em;
+	transition:0.5s;
+}
+
+
+.input-field{
+    height: 40px;
+    background-color:#fff;
+    margin: 10px 0;
+    margin-left: 10%;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+	width:80%;
+}
+.input-field i{
+    flex: 0.4;
+    text-align: center;
+    color: #666;
+    font-size: 1.5em;
+}
+
+.input-field input,select{
+	flex: 5;
+	background-color:#fff;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+	height:35px;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	
+    
+}
+
+input:hover{
+	transition:all 0.5s;
+	cursor:pointer;
+	background-color: rgba(192, 192, 192, 0.303);
+	
+}
+
+select:hover{
+	transition:all 0.5s;
+	cursor:pointer;
+	background-color: rgba(192, 192, 192, 0.303);
+	
+}
+
+.secretkey input{
+	margin-left: 100px;
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+}
+
+
+.button button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background-color: #16f312; 
+    border: 2px solid #29ca17; 
+    border-radius: 25px;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	margin-left: 40%;
+}
+.button button:hover {
+	background-color: #28c117; 
+    border-color: #f3fff1; 
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+	
+}
+
+.social-text{
+	text-align: center;
+    margin-top: 20px;
+    color: #888;
+}
+
+.social-media{
+	margin-left: 60%;
+	display: flex;
+    justify-content: center;
+    margin-top:-5%;
+}
+
+.social-icon{
+	
+	height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 50%;
+    margin: 0 10px;
+    font-size: 1.5em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+   
+}
+
+a{
+    text-decoration: none;
+    
+}
+
+.social-icon:hover{
+	background-color: #2980b9;
+    transform: scale(1.1);
+}
+
+.text{
+    margin-left:10%;
+   
+}
+
+

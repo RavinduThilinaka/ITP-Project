@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    width: 95%;
+    background: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 8px;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+	margin-left:30px;
+	border-radius:8px;
+	
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+
+header nav a {
+    color: #fff;
+    margin: 0 10px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.4s, transform 0.3s ease-out;
+}
+
+header nav a::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: transparent;
+    transition: width 0.3s ease-out, left 0.3s ease-out, background-color 0.4s;
+}
+
+header nav a:hover::before,
+header nav a.active::before {
+    width: 100%;
+    left: 0;
+    background-color: #14ff72cb; /* Change to your desired active link color */
+}
+
+header nav a:hover {
+    color: #14ff72cb; /* Change to your desired hover color */
+    transform: translateY(-3px); /* Add a slight lift effect */
+}

@@ -1,0 +1,198 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Topbar Styles */
+.QATopbar {
+    background: linear-gradient(135deg, #14d01e, #49f852); /* Green gradient */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 2fr 10fr 0.4fr 1fr;
+    align-items: center;
+    z-index: 1000; 
+    border-bottom: 2px solid #000000;
+}
+
+/* Sidebar Styles */
+.QASidebar {
+    position: fixed; /* Fixes the sidebar in place */
+    top: 60px; /* Aligns it below the topbar */
+    left: 0;
+    width: 260px;
+    height: calc(100vh - 60px); /* Ensures it takes full height of the screen */
+    background: linear-gradient(135deg, #0c9c14, #49f852);/* Green gradient */
+    padding-top: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Allows scrolling within the sidebar if content overflows */
+    z-index: 999; /* Ensures sidebar is above the main content */
+}
+
+.QASidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.QASidebar ul li {
+    transition: transform 0.3s ease;
+}
+
+.QASidebar ul li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 25px;
+    transition: background 0.3s ease, padding-left 0.3s ease;
+    margin-top: 10px;
+}
+
+.QASidebar ul li a:hover {
+    background-color: #2e7d32; /* Dark green */
+    padding-left: 30px;
+}
+
+/* Main Content Styles */
+.QAMain {
+    margin-left: 260px; 
+    padding: 40px 30px;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+    background: #e8f5e9; 
+   
+}
+
+/* Chart Section Styles */
+.chart-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows charts to wrap to the next line if needed */
+    gap: 20px; /* Space between the charts */
+    width: 100%;
+    padding: 20px 0;
+}
+
+.chart-box {
+    flex: 1;
+    min-width: 300px; /* Ensures each chart box has a minimum width */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Card and Submain Styles */
+.QAsubmain {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.QAsubmain .QAsubmain {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.QAsubmain .QAsubmain:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #388e3c, #81c784); /* Green gradient */
+}
+
+/* Form Styles */
+.QulityForm {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.QulityForm .input {
+    margin-bottom: 10px;
+}
+
+.QulityForm input,
+.QulityForm select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.QulityForm button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.QulityForm button:hover {
+    background-color: #0056b3;
+}
+
+/* Table Styles */
+.QulityTable {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+}
+
+.QulityTable table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.QulityTable th,
+.QulityTable td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.QulityTable th {
+    background-color: #f8f8f8;
+    text-align: left;
+}
+
+/* Headings */
+h3 {
+    font-size: 35px;
+    text-align: center;
+    color: #2e7d32; /* Dark green */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.QAcharts {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .QAchartBox {
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  .QAchart {
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    background-color: #fff;
+  }
