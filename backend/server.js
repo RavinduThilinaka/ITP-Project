@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 app.use(express.json());
 
-const uri="mongodb://localhost:27017/teaFactory";
+const uri="mongodb+srv://Ravindu:ThilinakaMdb16@cluster0.h6r9a.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const connect=async()=>{
     try{
