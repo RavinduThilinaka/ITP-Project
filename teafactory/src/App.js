@@ -65,7 +65,7 @@ function App() {
               <img src="./image/TeaLeaf4.jpg" alt=""/>
 
               <div className='profileName'>
-                <h1>Welcome, {userName}!</h1>
+                <h4>Welcome, {userName}!</h4>
               </div>
               
               <div className="content">

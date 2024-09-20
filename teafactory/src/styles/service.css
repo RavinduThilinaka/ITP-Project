@@ -1,0 +1,232 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.serviceContainer{
+    min-height: 100vh;
+    width: 100%;
+    background-color: #191a2b;
+}
+
+.serviceWrapper{
+    padding: 5% 8%;
+
+}
+
+.service{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1{
+    font-size: 5rem;
+    letter-spacing: 3px;
+    position: relative;
+    margin-top: 25px;
+    background: linear-gradient(45deg, #00e6ad, #081135); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -webkit-text-stroke-width: 1px; 
+    -webkit-text-stroke-color: #00e6ad;
+
+}
+
+h1:after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    height: 8px;
+    width:80%;
+    border-radius: 8px;
+    background-color: rgba(225,255, 255, 0.05);
+}
+
+h1 span{
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #72e2ae;
+    animation: anim 5s linear infinite;
+
+}
+
+@keyframes anim{
+    95%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        left: 86%;
+
+    }
+}
+
+.serviceCards{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+    margin-top: 78px;
+
+}
+
+.serviceCard{
+    height: 350px;
+    width: 370px;
+    background-color: #191a2b;
+    padding: 3% 8%;
+    border: 0.2px solid rgba(114,226,174,0.2);
+    border-radius: 8px;
+    transition: .6s;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.serviceCard:after{
+    content: "";
+    position: absolute;
+    top: 150%;
+    left: -200%;
+    width: 120%;
+    transform: rotate(50deg);
+    background-color: #fff;
+    height: 20px;
+    filter: blur(28px);
+    opacity: 0.5;
+    transition: 1s;
+}
+
+.serviceCard:hover:after{
+
+    width: 225%;
+    top:-100%;
+   
+
+}
+
+.serviceCard i{
+    color: #22c846;
+    margin-top: 38px;
+    margin-bottom: 18px;
+    font-size: 4.8rem;
+}
+
+.serviceCard h2{
+    color: aliceblue;
+    font-size: 22px;
+    font-weight: 650;
+    letter-spacing: 1px;
+}
+
+.serviceCard p{
+
+    text-align: center;
+    width: 100%;
+    margin: 12px 0;
+    color: rgba(255,255,255,0.6);
+}
+
+.serviceCard:hover{
+    background-color: transparent;
+    transform: translateY(-8px);
+    border-color: #00ff37;
+    cursor: pointer;
+}
+
+.serviceCard:hover i{
+    color: #00ff37;
+}
+
+
+header {
+    width: 95%;
+    background: #0ea809;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 8px;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+	margin-left:30px;
+	border-radius:8px;
+    border-bottom: 5px solid #f1f0f0;
+	
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+
+header nav a {
+    color: #fff;
+    margin: 0 10px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.4s, transform 0.3s ease-out;
+}
+
+header nav span {
+    color: #fff;
+    margin: 0 10px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.4s, transform 0.3s ease-out;
+}
+
+header nav a::before,
+header nav span::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: transparent;
+    transition: width 0.3s ease-out, left 0.3s ease-out, background-color 0.4s;
+}
+
+header nav a:hover::before,
+header nav span:hover::before,
+header nav a.active::before,
+header nav span.active::before {
+    width: 100%;
+    left: 0;
+    background-color: #ffffff; 
+}
+
+header nav a:hover,
+header nav span:hover {
+    color: #ffffff; 
+    transform: translateY(-3px);
+    cursor: pointer; 
+}
