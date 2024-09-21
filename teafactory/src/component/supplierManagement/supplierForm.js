@@ -92,8 +92,9 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         <Grid
          spacing={1}
          sx={{
-            backgroundImage: "url('./image/LineGraph.png')",  
+            backgroundImage: "url('./image/supplier.png')",  
             backgroundColor:"#e6eae6bf",
+            backgroundPosition:"center",
             padding: "20px",
             borderRadius: "10px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)",
@@ -115,9 +116,9 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         <Grid 
         spacing={1} 
         sx={{
-            backgroundImage: "url('./image/LineGraph.png')",   
+            backgroundImage: "url('./image/supplier.png')",   
             backgroundColor: "#e6eae6bf",
-            backgroundSize:"cover",
+            backgroundPosition:"center",
             padding: "30px",
             borderRadius: "10px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)",
