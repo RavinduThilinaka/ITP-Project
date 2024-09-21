@@ -15,6 +15,7 @@ import Quantity from './component/qaManagement/quality';
 import QulityForm from './component/qaManagement/qulityForm';
 import QuantityTable from './component/qaManagement/qulityTable';
 import ServicePage from './service';
+import ContactUs from './component/contactManagement/contact';
 
 
 
@@ -33,6 +34,7 @@ root.render(
       <Route path='/qualityform' element={<QulityForm/>}/>
       <Route path='/qualityTable' element={<QuantityTable/>}/>
       <Route path='/service' element={<ServicePage/>}/>
+      <Route path='/contactus' element={<ContactUs/>}/>
     
      
     
