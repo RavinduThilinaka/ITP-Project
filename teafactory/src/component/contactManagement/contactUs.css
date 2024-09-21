@@ -1,0 +1,223 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contactusBody{
+   background-image: url("/public/image/TeaLeaf.jpg");
+   background-position: center;
+   background-size: cover;
+   
+
+}
+
+
+.contactUs{
+    position: relative;
+    width: 100%;
+    padding: 40px 100px;
+}
+
+.contactUs .contactusTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+}
+
+.contactUs .contactusTitle h4{
+    color: #fafafa;
+    font-size: 50px;
+
+}
+
+.contactusBox{
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 5fr 4fr;
+    grid-template-areas: 
+    "form info"
+    "form map";
+    grid-gap:20px ;
+    margin-top: 60px;
+}
+
+.form{
+    grid-area: form;
+}
+
+
+.info{
+    grid-area: info;
+}
+
+
+.map{
+    grid-area: map;
+}
+
+.contact {
+    padding: 40px;
+    background-image: url("/public/image/contactImg.png");
+    background-size: cover;
+    box-shadow: 0 0 8px rgba(33, 33, 28, 0.868);
+    border: none;
+    
+}
+
+.contact h3{
+    color: #fbfbfc;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+
+}
+
+/*////////////////////*/
+
+.formBox{
+    position: relative;
+    width: 100%;
+
+}
+
+.formBox .row50{
+    display: flex;
+    gap:20px;
+}
+
+.inputBox{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 50%;
+    
+}
+
+.formBox .row100 .inputBox{
+    width: 100%;
+
+}
+
+.inputBox span{
+    color: rgba(0, 0, 0, 0.882);
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.inputBox input{
+    padding: 10px;
+    font-size: 1.0em;
+    outline: none;
+    border: 1px solid #000000;
+    
+}
+
+.inputBox textarea{
+    padding: 10px;
+    font-size: 1.0em;
+    outline: none;
+    border: 1px solid #000000;
+    resize: none;
+    min-height: 220px;
+    margin-bottom: 10px;
+
+}
+
+.inputBox button{
+    background: #65db2a;
+    color: rgb(255, 255, 255);
+    border: none;
+    margin-top: 10px;
+    font-size: 1.0rem;
+    max-width: 120px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 14px 15px;
+    transition:transform 0.5s;
+}
+
+.inputBox button:hover{
+    background: #18b20d;
+    transform:translateY(-2px);
+}
+
+
+
+
+/*//////////////*/
+.info{
+    background-image: url("/public/image/contactImg.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.info h3{
+    color: antiquewhite;
+}
+
+.info .infoBox div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.info .infoBox div span{
+    min-width: 45px;
+    height: 40px;
+    color: #fff;
+    background: #0ead1b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+.info .infoBox div p{
+    color: aliceblue;
+    font-size: 1.0rem;
+   
+}
+
+.info .infoBox div a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 1.0rem;
+   
+}
+
+.sci{
+    margin-top: 45px;
+    display: flex;
+}
+
+.sci li{
+    list-style:none;
+    margin-right: 16px;
+}
+
+.sci li a{
+    color:rgb(253, 253, 253);
+    font-size: 1.8em;
+}
+
+.map{
+    padding: 0;
+}
+
+.map iframe{
+    width: 100%;
+    height: 100%;
+}
+
+.leaf{
+    margin-left: 15px;
+    font-size: 50px;
+    color: #073d03;
+}
