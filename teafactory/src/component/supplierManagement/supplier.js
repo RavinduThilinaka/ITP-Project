@@ -182,10 +182,10 @@ const chartData3 = {
 
 /////////////////////////////////////////////////////////////////////////////////
 const Logout = () => {
-    // Remove username from localStorage and reset state
+    
     localStorage.removeItem('userName');
-    setUserName(''); // Clear the state
-    navigate('/login'); // Navigate to the login page
+    setUserName('');
+    navigate('/login'); 
   };
 
   useEffect(() => {

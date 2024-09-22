@@ -21,6 +21,7 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
     const [checkDate,setDate]=useState(0);
     const [leafType,setLeafType]=useState();
     const [moisturisingError, setMoisturisingError] = useState('');
+    const [errors, setErrors] = useState({});
 
     useEffect(()=>{
         if(!submitted){
@@ -31,7 +32,7 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
             setWight('');
             setDate('');
             setLeafType('');
-            setMoisturisingError('');
+           
         }
     },[submitted])
 
@@ -47,6 +48,19 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
         }
     },[data])
 
+    const resetFields = () => {
+        setName('');
+        setMoisturisingLevel('');
+        setWight('');
+        setDate('');
+        setLeafType('');
+        setErrors({});
+    };
+
+    const validateMoisturisingLevel = (level) => {
+        return level === '' || (Number(level) >= 0 && Number(level) <= 100);
+    };
+
     const handleNameKeyPress = (e) => {
         if (!isValidTextChar(e.key)) {
             e.preventDefault();
@@ -55,15 +69,32 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
 
     const handleMoisturisingLevelChange = (e) => {
         const value = e.target.value;
-
-        // Validate moisturising level: must be between 0 and 100
-        if (value === '' || (Number(value) >= 0 && Number(value) <= 100)) {
+        if (validateMoisturisingLevel(value)) {
             setMoisturisingLevel(value);
-            setMoisturisingError('');  // Clear error if valid
+            setMoisturisingError('');
         } else {
-            setMoisturisingError('Moisturising level must be between 0 and 100.');  // Set error message
+            setMoisturisingError('Moisturising level must be between 0 and 100.');
         }
     };
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (!sName) newErrors.sName = "Supplier Name is required.";
+        if (!moisturisingLevel || !validateMoisturisingLevel(moisturisingLevel)) newErrors.moisturisingLevel = "Valid Moisturising Level is required.";
+        if (!wight) newErrors.weight = "Weight is required.";
+        if (!checkDate) newErrors.checkDate = "Date is required.";
+        if (!leafType) newErrors.leafType = "Leaf Type is required.";
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = () => {
+        if (validateForm()) {
+            isEdit ? updateQulity({ qId, sName, moisturisingLevel, wight, checkDate, leafType }) : addQulity({ qId, sName, moisturisingLevel, wight, checkDate, leafType });
+        }
+    };
+
     
 
     return(
@@ -110,43 +141,42 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}} >Supplier Name</Typography>
                 <div className="input"><input type="text" placeholder="Enter Supplier Name" onKeyPress={handleNameKeyPress} value={sName} onChange={e=>setName(e.target.value)}></input></div>
+                {errors.sName && <Typography sx={{ color: "red" }}>{errors.sName}</Typography>}
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}}>Moisturising level</Typography>
-                <div className="input"><input type="number" placeholder="Enter Moisturising level" value={moisturisingLevel}  onChange={handleMoisturisingLevelChange}></input>{/* Error message */}
-                        {moisturisingError && (
-                            <Typography sx={{ color: "red", fontSize: "14px" }}>
-                                {moisturisingError}
-                            </Typography>
-                        )}</div>
+            <div className="input"><input type="number" placeholder="Enter Moisturising level" value={moisturisingLevel}  onChange={handleMoisturisingLevelChange}></input></div>
+            {moisturisingError && <Typography sx={{ color: "red" }}>{moisturisingError}</Typography>}
         </Grid>
        
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}}>Weight</Typography>
                 <div className="input"><input type="number" placeholder="Enter Weight" value={wight} onChange={e=>setWight(e.target.value)}></input></div>
+                {errors.weight && <Typography sx={{ color: "red" }}>{errors.weight}</Typography>}
         </Grid>
 
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}}>Date</Typography>
                 <div className="input"><input type="date" placeholder="Enter Date" value={checkDate} min={getCurrentDate()} onChange={e=>setDate(e.target.value)}></input></div>
+                {errors.checkDate && <Typography sx={{ color: "red" }}>{errors.checkDate}</Typography>}
         </Grid>
 
 
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}}>Leaf type</Typography>
-                <div className="input" value={leafType} onChange={e=>setLeafType(e.target.value)}><select>
+                <div className="input" value={leafType} onChange={e=>setLeafType(e.target.value)}  style={{ fontWeight: "normal" }}><select>
                     <option>-----Select Tea Type----</option>
                     <option value="Hight Qulity">Hight Qulity</option>
                     <option value="Mid Qulity">Mid Qulity</option>
                     <option value="Low Qulity">Low Qulity</option>
                    
                 </select></div>
+                {errors.leafType && <Typography sx={{ color: "red" }}>{errors.leafType}</Typography>}
         </Grid>
 
         <Grid>
            <Typography sx={{marginLeft:"42%"}} className="supplierBtn">
-           <button onClick={()=> isEdit ? updateQulity({qId,sName,moisturisingLevel,wight,checkDate,leafType}) : addQulity({qId,sName,moisturisingLevel,wight,checkDate,leafType})}
-                >
+           <button onClick={handleSubmit}>
                     {
                     isEdit? 'Update' : 'Submit'
                     }

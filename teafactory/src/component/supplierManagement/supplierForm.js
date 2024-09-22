@@ -29,7 +29,9 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
     const [price, setPrice] = useState('');
     const [priceError, setPriceError] = useState('');
     const [nameError, setNameError] = useState('');
-   
+    const [quantityError, setQuantityError] = useState('');
+    const [teaTypeError, setTeaTypeError] = useState('');
+    const [orderDateError, setOrderDateError] = useState('');
 
     useEffect(()=>{
         if(!submitted){
@@ -57,21 +59,21 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
     const handleNameKeyPress = (e) => {
         if (!isValidTextChar(e.key)) {
             e.preventDefault();
-            setNameError('Only letters and spaces are allowed.');
+            setNameError('You can only use characters and spaces.');
         }
     };
 
     const handlePirceKeyPress = (e) => {
         if (!isSecondvalide(e.key)) {
             e.preventDefault();
-            setPriceError('Only Number and spaces are allowed.');
+            setPriceError('The only thing that is allowed are numbers and spaces.');
         }
     };
 
 
     const validatePrice = () => {
         if (!isValidPrice(price)) {
-            setPriceError('Price must be a positive number.');
+            setPriceError('The price must be more than zero.');
             return false;
         }
         setPriceError('');
@@ -79,7 +81,28 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
     };
 
     const handleSubmit = () => {
-        if (validatePrice()) {
+
+            // Reset error messages
+            setNameError('');
+            setQuantityError('');
+            setTeaTypeError('');
+            setOrderDateError('');
+
+            if (!sName) {
+                setNameError("Supplier Name is required.");
+            }
+            if (!quantity) {
+                setQuantityError("Quantity is required.");
+            }
+            if (!teaType) {
+                setTeaTypeError("Tea Type is required.");
+            }
+            if (!orderDate) {
+                setOrderDateError("Order Date is required.");
+            }
+    
+
+        if (sName && quantity && teaType && orderDate && validatePrice()) {
            
             isEdit ? updateSupplier({ sId, sName, quantity, teaType, orderDate, price }) : addSupplier({ sId, sName, quantity, teaType, orderDate, price });
         }
@@ -138,6 +161,7 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Quantity</Typography>
                 <div className="input"><input type="number" placeholder="Enter Quantity"  value={quantity} onChange={e=>setQuantity(e.target.value)} required></input></div>
+                {quantityError && <Typography sx={{ color: "red" }}>{quantityError}</Typography>}
                
         </Grid>
         <Grid item xs={6} sm={0}>
@@ -149,10 +173,12 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
                     <option value="Oolong Tea">Oolong Tea</option>
                     <option value="Herbal infusion">Herbal infusion</option>
                 </select></div>
+                {teaTypeError && <Typography sx={{ color: "red" }}>{teaTypeError}</Typography>}
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Order date</Typography>
                 <div className="input"><input type="date" placeholder="Enter Order date" value={orderDate} min={getCurrentDate()} onChange={e=>setOrderDate(e.target.value)} require></input></div>
+                {orderDateError && <Typography sx={{ color: "red" }}>{orderDateError}</Typography>}
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Price</Typography>
@@ -162,8 +188,7 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
 
         <Grid>
            <Typography sx={{marginLeft:"42%"}} className="supplierBtn">
-                <button onClick={handleSubmit}
-                >
+                <button onClick={handleSubmit}>
                     {
                     isEdit? 'Update' : 'Submit'
                     }
