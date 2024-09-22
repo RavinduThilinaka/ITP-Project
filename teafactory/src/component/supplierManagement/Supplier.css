@@ -527,3 +527,9 @@ table tbody tr:nth-of-type(even) {
   transition: 0.3s;
   
 }
+
+.supplierName{
+    font-size: 35px;
+    color: #5f605f;
+    margin-right: 80px;
+}

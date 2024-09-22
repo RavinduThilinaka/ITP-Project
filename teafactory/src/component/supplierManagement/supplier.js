@@ -7,6 +7,8 @@ import SupplierForm from './supplierForm.js';
 import  Axios  from 'axios';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, Title, Tooltip, Legend, BarElement, BarController, LineElement, LineController,PointElement  } from 'chart.js';
+import { useNavigate } from 'react-router-dom';
+
 ChartJS.register(ArcElement, CategoryScale, LinearScale, Title, Tooltip, Legend, BarElement, BarController, LineElement, LineController,PointElement );
 
 
@@ -41,6 +43,9 @@ const Supplier=()=>{
     const [submitted,setSubmitted]=useState(false);
     const [selectedSupplier,setSelectedSupplier]=useState({});
     const [isEdit,setIsEdit]=useState(false);
+    const [userName, setUserName] = useState('');
+    const navigate = useNavigate();
+
 
     useEffect(()=>{
         getSupplier();
@@ -175,6 +180,22 @@ const chartData3 = {
         toggleSidebar();
     }, []);
 
+/////////////////////////////////////////////////////////////////////////////////
+const Logout = () => {
+    // Remove username from localStorage and reset state
+    localStorage.removeItem('userName');
+    setUserName(''); // Clear the state
+    navigate('/login'); // Navigate to the login page
+  };
+
+  useEffect(() => {
+    const name = localStorage.getItem('userName');
+    if (name) {
+      setUserName(name);
+    }
+  }, []);
+
+  /////////////////////////////////////////////////////////////
 
     return(
         <div className="SupplierDashboard">
@@ -244,7 +265,7 @@ const chartData3 = {
                     </a>
                 </li>
 
-                <li >
+                <li onClick={Logout}>
                     <a href="/login" >
                         <span class="horizontal_box">
                             <ion-icon icon={logOutOutline}></ion-icon>
@@ -261,13 +282,15 @@ const chartData3 = {
                     <div class="toggle">
                         <ion-icon icon={menuOutline}></ion-icon>
                     </div>
-
-
+                    
+                            <div className='supplierName'><h4>Welcome, {userName}!</h4></div>
+             
                     <div class="userProfile">
                         <img src="./image/profile.jpg"/>
                     </div>
+                    
                 </div>
-
+                    
                 <div class="cardBox">
                     
                 <div className="teaTypeChart">
