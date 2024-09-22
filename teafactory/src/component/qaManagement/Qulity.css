@@ -22,8 +22,9 @@
 
 .QATopbar .h2{
     text-align: center;
-    font-size: 18px;
+    font-size: 38px;
     font-family: "uppercase";
+    color: #edecec;
 }
 /* Sidebar Styles */
 .QASidebar {
@@ -67,8 +68,27 @@
     margin-left: 5px;
 }
 
-.QAsidemenu, .QAsidemenu2, .QAsidemenu3, .QAsidemenu4, .QAsidemenu5, .QAsidemenu6, .QAsidemenu7{
+.QAsidemenu, .QAsidemenu2, .QAsidemenu3, .QAsidemenu4, .QAsidemenu5, .QAsidemenu6{
     margin-left: 18px;
+}
+
+.QAsidemenu7{
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 25px;
+    transition: background 0.3s ease, padding-left 0.3s ease;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.QAsidemenu7:hover{
+    background-color: #080808; 
+    padding-left: 30px;
+    color: rgb(188, 188, 15);
+    cursor: pointer;
 }
 
 .QASidebar ul li a:hover {

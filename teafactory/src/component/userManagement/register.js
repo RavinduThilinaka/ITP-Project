@@ -24,8 +24,8 @@ function Register(){
   const handleSubmit=(e)=>{
     
 
-    if(userType=="Admin" && secretKey!="admin"){
-      alert("Invalid Admin")
+    if((userType=="Admin" || userType=="Supplier"|| userType === "QaManager"|| userType === "SalesConsaltent") && secretKey!="teafactory"){
+      alert("You have not access this page!!")
     }else{
 
       e.preventDefault()
@@ -59,30 +59,20 @@ useEffect(() => {
 
               <i><h2><FontAwesomeIcon icon={faUserPlus} />Sign Up</h2></i>
 
-          <div className='secretkey'>
+              <div className="userType">
+                 
+                  <select name="userType" onChange={(e) => setUserType(e.target.value)}id="userType" required>
+
+                        <option value="">Select user type</option>
+                        <option value="user">User</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Supplier">Supplier</option>
+                        <option value="QaManager">Qa Manager</option>
+                        <option value="SalesConsaltent">Salase Consaltent</option>
+                  </select>
+              </div>
             
-              <input 
-                type="radio" 
-                placeholder="Enter your name" 
-                name="userType"
-                value="user"
-                onChange={(e)=>setUserType(e.target.value)} 
-                id="secretKey" 
-                required />
-            User
-
-              <input 
-                type="radio" 
-                placeholder="Enter your name" 
-                name="userType" 
-                value="Admin"
-                onChange={(e)=>setUserType(e.target.value)}
-                id="secretKey" 
-                required />
-              Admin
-          </div>
-
-            {userType=="Admin"?(
+            {userType=="Admin"|| userType === "Supplier"|| userType === "QaManager"|| userType === "SalesConsaltent"?(
               <div className="input-field" >
               <i> <FontAwesomeIcon icon={faKey} /></i>
                 <input 
