@@ -19,32 +19,38 @@ function Login() {
   const handleSubmit = (e) => {
       e.preventDefault();
 
-      if(email==='supplier@gmail.com' && password==='supplier'){
-        navigate('/supplier');
-      }else{
-      
       axios.post('http://localhost:3001/api/login', { email, password })
+      .then(result => {
+        console.log(result);
 
-          .then(result => {
-              console.log(result);
-              if (result.data.message  === "Success!!!") {
-                localStorage.setItem('userName', result.data.name);
+        if (result.data.message === "Success!!!") {
+          localStorage.setItem('userName', result.data.name); // Store user name
 
-                if (result.data.userType === "Admin") {
-                  navigate('/service'); 
-                } else {
-                  navigate('/'); 
-                }
-
-              }else{
-                alert(result.data.message);
-              }
-          })
-          .catch(error => {
-            console.log(error);
-            alert('Incorrect password or email');
-          });
-  }
+          const userType = result.data.userType; // Get userType from response
+          switch (userType) {
+            case 'Admin':
+              navigate('/admin-dashboard');
+              break;
+            case 'Supplier':
+              navigate('/supplier');
+              break;
+            case 'QaManager':
+              navigate('/quality');
+              break;
+            case 'SalesConsaltent':
+              navigate('/service');
+              break;
+            default:
+              navigate('/'); // Default for 'User'
+          }
+        } else {
+          alert(result.data.message); // Handle invalid login
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        alert('Incorrect password or email');
+      });
 }
     return(
       <div className='body'>

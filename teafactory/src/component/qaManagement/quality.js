@@ -1,12 +1,14 @@
 
 import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faSearch, faBell, faHome, faWallet, faPeopleGroup, faChartBar, faGear, faCircleQuestion, faSignOut,faComment,faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faSearch, faBell, faHome, faWallet, faPeopleGroup, faChartBar, faGear, faCircleQuestion, faSignOut,faComment,faDollarSign,faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import QulityForm from './qulityForm';
 import './Qulity.css'
 import QuantityTable from './qulityTable';
 import  Axios  from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,LineChart,Line, PieChart, Pie } from 'recharts';
+import { Link,useNavigate } from 'react-router-dom';
+
 
 
 const Quantity=()=>{
@@ -99,6 +101,23 @@ const deleteQulity=(data)=>{
           console.error("Axios error",error);
       })
 }
+
+/////////////////////////////////////////////////////////////
+const [userName, setUserName] = useState('');
+const navigate=useNavigate();
+
+const Logout = () => {
+  localStorage.removeItem('userName');
+  navigate('/login');
+};
+
+useEffect(() => {
+  const name = localStorage.getItem('userName');
+  if (name) {
+    setUserName(name);
+  }
+}, []);
+
 return(
 
   <div className="QAContainer">
@@ -108,7 +127,7 @@ return(
       <img src='/image/TeaFactoryLogo.png' width={50} height={50}/>
     </div>
     <div className="h2">
-      <h2>Tea Factory</h2>
+      <h4>Welcome, {userName}!</h4>
     </div>
   
     <div className='notification'>
@@ -156,10 +175,15 @@ return(
         </a>
       </li>
       <li>
-        <a href="login">
-        <FontAwesomeIcon icon={faSignOut} />
-          <div className="QAsidemenu7">Log Out</div>
-        </a>
+        <div className='QAsidemenu7'>
+         {userName ? (
+                 <>
+                  <span className="" onClick={Logout}><FontAwesomeIcon icon={faSignInAlt} />&nbsp;&nbsp;&nbsp; Logout</span>
+                </>
+                  ) : (
+                    <Link to="#" ></Link>
+                  )}
+        </div>
       </li>
      
     </ul>
