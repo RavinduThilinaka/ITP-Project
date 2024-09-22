@@ -61,10 +61,10 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
                                 filteredRows && filteredRows.length > 0 ? filteredRows.map(row=>(
                                     <tr key={row.sId}>
                                         <td>{row.sName}</td>
-                                        <td>{row.quantity}</td>
+                                        <td>{row.quantity} Kg</td>
                                         <td>{row.teaType}</td>
                                         <td>{row.orderDate}</td>
-                                        <td>{row.price}</td>
+                                        <td>Rs.{row.price}</td>
                                         <td className="noPrint">
                                             <button className='updateBtn' onClick={()=>selectedSupplier({sId: row.sId,sName: row.sName ,quantity: row.quantity, teaType: row.teaType, orderDate: row.orderDate, price: row.price})}>Update</button>
                                             <button className='deleteBtn' onClick={()=>deleteSupplier({sId:row.sId})}>Delete</button>

@@ -103,14 +103,18 @@ return(
 
   <div className="QAContainer">
   <div className="QATopbar">
-    <div className="QAlogo">
-      <h2>Royal Hotel</h2>
-    </div>
-   
-    <FontAwesomeIcon icon={faBell} />
-    <div className="QAuser">
+
+  <div className="QAuser">
       <img src='/image/TeaFactoryLogo.png' width={50} height={50}/>
     </div>
+    <div className="h2">
+      <h2>Tea Factory</h2>
+    </div>
+  
+    <div className='notification'>
+      <FontAwesomeIcon icon={faBell}  />
+    </div>
+
   </div>
 
   <div className="QASidebar">
@@ -152,7 +156,7 @@ return(
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="login">
         <FontAwesomeIcon icon={faSignOut} />
           <div className="QAsidemenu7">Log Out</div>
         </a>
@@ -169,7 +173,7 @@ return(
       <div className="QAchartBox"> 
         <div className="QAchart">
           <ResponsiveContainer width="60%" height={300}>
-            <BarChart data={qulity} margin={{ top: 20, right: 30, left: 60, bottom: 5 }}>
+            <BarChart data={qulity} >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="moisturisingLevel" />
               <YAxis />
@@ -187,14 +191,14 @@ return(
       <div className="QAchartBox"> 
         <div className="QAchart">
         <ResponsiveContainer width="60%" height={300}>
-          <PieChart data={qulity} margin={{ top: 20, right: 30, left: 80, bottom: 5 }}>
+          <PieChart data={qulity} margin={{}}>
             <Tooltip />
             <Legend />
             <Pie 
               data={qulity} 
               dataKey="wight" 
               nameKey="wight" 
-              fill="#8884d8" 
+              fill="Darkblue" 
               label
             />
           </PieChart >
@@ -203,6 +207,32 @@ return(
   
         </div>
       </div>
+
+  <div className="QAchartBox">
+  <div className="QAchart">
+    <ResponsiveContainer width="80%" height={300}>
+      <LineChart
+        data={qulity}
+        margin={{ }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis
+          dataKey="checkDate"
+          tickFormatter={(tick) => {
+            const date = new Date(tick);
+            return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+          }}
+        />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="moisturisingLevel" stroke="Brown" />
+      </LineChart>
+    </ResponsiveContainer>
+  </div>
+</div>
+
+
 
   </div>
         
