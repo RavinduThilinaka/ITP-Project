@@ -45,8 +45,8 @@ const QuantityTable=({rows=[],selectedQulity,deleteQulity})=>{
                     <thead>
                         <tr>
                             <th>Supplier Name</th>
-                            <th>Moisturising Level</th>
-                            <th>Weight</th>
+                            <th>Moisturising Level (100%)</th>
+                            <th>Weight (kg)</th>
                             <th>Date</th>
                             <th>Leaf Type</th>
                             <th className="noPrint">Action</th>
@@ -57,8 +57,8 @@ const QuantityTable=({rows=[],selectedQulity,deleteQulity})=>{
                                 filteredRows && filteredRows.length > 0 ? filteredRows.map(row=>(
                                     <tr key={row.qId}>
                                         <td>{row.sName}</td>
-                                        <td>{row.moisturisingLevel}</td>
-                                        <td>{row.wight}</td>
+                                        <td>{row.moisturisingLevel}%</td>
+                                        <td>{row.wight} Kg</td>
                                         <td>{row.checkDate}</td>
                                         <td>{row.leafType}</td>
                                         

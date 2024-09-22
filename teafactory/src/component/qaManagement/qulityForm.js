@@ -20,6 +20,7 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
     const [wight,setWight]=useState();
     const [checkDate,setDate]=useState(0);
     const [leafType,setLeafType]=useState();
+    const [moisturisingError, setMoisturisingError] = useState('');
 
     useEffect(()=>{
         if(!submitted){
@@ -30,6 +31,7 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
             setWight('');
             setDate('');
             setLeafType('');
+            setMoisturisingError('');
         }
     },[submitted])
 
@@ -48,6 +50,18 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
     const handleNameKeyPress = (e) => {
         if (!isValidTextChar(e.key)) {
             e.preventDefault();
+        }
+    };
+
+    const handleMoisturisingLevelChange = (e) => {
+        const value = e.target.value;
+
+        // Validate moisturising level: must be between 0 and 100
+        if (value === '' || (Number(value) >= 0 && Number(value) <= 100)) {
+            setMoisturisingLevel(value);
+            setMoisturisingError('');  // Clear error if valid
+        } else {
+            setMoisturisingError('Moisturising level must be between 0 and 100.');  // Set error message
         }
     };
     
@@ -99,7 +113,12 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}}>Moisturising level</Typography>
-                <div className="input"><input type="number" placeholder="Enter Moisturising level" value={moisturisingLevel} onChange={e=>setMoisturisingLevel(e.target.value)}></input></div>
+                <div className="input"><input type="number" placeholder="Enter Moisturising level" value={moisturisingLevel}  onChange={handleMoisturisingLevelChange}></input>{/* Error message */}
+                        {moisturisingError && (
+                            <Typography sx={{ color: "red", fontSize: "14px" }}>
+                                {moisturisingError}
+                            </Typography>
+                        )}</div>
         </Grid>
        
         <Grid item xs={6} sm={0}>
