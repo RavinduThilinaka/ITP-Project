@@ -25,6 +25,7 @@ function Login() {
 
         if (result.data.message === "Success!!!") {
           localStorage.setItem('userName', result.data.name); // Store user name
+          // localStorage.setItem('user', result.data); // Store user ID
 
           const userType = result.data.userType; // Get userType from response
           switch (userType) {

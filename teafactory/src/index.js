@@ -16,8 +16,7 @@ import QulityForm from './component/qaManagement/qulityForm';
 import QuantityTable from './component/qaManagement/qulityTable';
 import ServicePage from './service';
 import ContactUs from './component/contactManagement/contact';
-import SalesConsultantForm from './component/salesManagement/salesConsultantForm';
-import SalesConsultantTable from './component/salesManagement/salesConsultentTable';
+import SalesConsultant from './component/salesConsultantManagement/salesConsultant';
 
 
 
@@ -27,6 +26,7 @@ root.render(
     <Routes>
       <Route path='/' element={<App/>}/>
       <Route path='/register' element={<Register/>}/>
+      <Route path='/sales-consultant' element={<SalesConsultant/>}/>
       <Route path='/registerTable' element={<RegisterTable/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/supplierTable' element={<SupplierTable/>}/>
@@ -37,9 +37,6 @@ root.render(
       <Route path='/qualityTable' element={<QuantityTable/>}/>
       <Route path='/service' element={<ServicePage/>}/>
       <Route path='/contactus' element={<ContactUs/>}/>
-      <Route path='/salesform' element={<SalesConsultantForm/>}/>
-      <Route path='/salesTable' element={<SalesConsultantTable/>}/>
-    
     </Routes>
 </BrowserRouter>
 );
