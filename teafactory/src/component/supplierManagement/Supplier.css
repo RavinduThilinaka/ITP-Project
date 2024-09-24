@@ -165,7 +165,7 @@ body{
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
-    font-size: 20px;
+    font-size: 35px;
 }
 
 /*-------------------------------------*/
@@ -384,7 +384,7 @@ table {
 }
 
 table thead tr {
-    background-color: #222;
+    background-color: #0d712b;
     color: #ffffff;
     text-align: left;
     font-weight: bold;

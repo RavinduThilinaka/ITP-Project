@@ -66,7 +66,7 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
     const handlePirceKeyPress = (e) => {
         if (!isSecondvalide(e.key)) {
             e.preventDefault();
-            setPriceError('The only thing that is allowed are numbers and spaces.');
+            setPriceError('The only thing that is allowed are numbers.');
         }
     };
 
@@ -79,6 +79,25 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         setPriceError('');
         return true;
     };
+
+    const handleQuantityKeyPress = (e) => {
+        if (!isSecondvalide(e.key)) {
+            e.preventDefault();
+            setQuantityError('The only thing that is allowed are numbers.');
+        }
+    };
+
+    
+    const handleQuantityChange = (e) => {
+        const value = e.target.value;
+        if (parseFloat(value) < 0) {
+            setQuantityError('Quantity cannot be negative.');
+        } else {
+            setQuantityError('');
+            setQuantity(value);
+        }
+    };
+
 
     const handleSubmit = () => {
 
@@ -160,7 +179,7 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Quantity</Typography>
-                <div className="input"><input type="number" placeholder="Enter Quantity"  value={quantity} onChange={e=>setQuantity(e.target.value)} required></input></div>
+                <div className="input"><input type="number" placeholder="Enter Quantity"  value={quantity}  onKeyPress={handleQuantityKeyPress} onChange={handleQuantityChange} required></input></div>
                 {quantityError && <Typography sx={{ color: "red" }}>{quantityError}</Typography>}
                
         </Grid>

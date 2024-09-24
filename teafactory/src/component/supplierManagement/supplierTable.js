@@ -4,6 +4,7 @@ import { useReactToPrint } from "react-to-print";
 import React, { useEffect ,useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import { searchOutline } from 'ionicons/icons';
+import { color } from 'framer-motion';
 
 
 const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
