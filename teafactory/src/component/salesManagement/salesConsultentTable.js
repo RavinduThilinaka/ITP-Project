@@ -1,4 +1,4 @@
-import './Supplier.css'
+import './SalesConsultant.css';
 import { IonIcon } from '@ionic/react';
 import { useReactToPrint } from "react-to-print";
 import React, { useEffect ,useRef, useState } from 'react';
@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 import { searchOutline } from 'ionicons/icons';
 
 
-const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
+const SalesConsultantTable=({rows=[],selectedOrder,deleteOrder})=>{
 
     const ComponentsRef=useRef();
     const handlePrint=useReactToPrint({
@@ -48,26 +48,30 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
                         <table ref={ComponentsRef}>
                             <thead>
                                 <tr>
-                                    <th>Supplier Name</th>
+                                    <th>Customer Name</th>
                                     <th>Quantity (Kg)</th>
                                     <th>Tea type</th>
                                     <th>Order date</th>
                                     <th>Price (LKR)</th>
+                                    <th>Contact Number (LKR)</th>
+                                    <th>Address</th>
                                     <th className="noPrint">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                               {
                                 filteredRows && filteredRows.length > 0 ? filteredRows.map(row=>(
-                                    <tr key={row.sId}>
-                                        <td>{row.sName}</td>
+                                    <tr key={row.customerId}>
+                                        <td>{row.customerName}</td>
                                         <td>{row.quantity} Kg</td>
                                         <td>{row.teaType}</td>
                                         <td>{row.orderDate}</td>
                                         <td>Rs.{row.price}</td>
+                                        <td>{row.contactNumber}</td>
+                                        <td>{row.address}</td>
                                         <td className="noPrint">
-                                            <button className='updateBtn' onClick={()=>selectedSupplier({sId: row.sId,sName: row.sName ,quantity: row.quantity, teaType: row.teaType, orderDate: row.orderDate, price: row.price})}>Update</button>
-                                            <button className='deleteBtn' onClick={()=>deleteSupplier({sId:row.sId})}>Delete</button>
+                                            <button className='updateBtn' onClick={()=>selectedOrder({customerId: row.customerId,customerName: row.customerName ,quantity: row.quantity, teaType: row.teaType, orderDate: row.orderDate, price: row.price,address:row.address,contactNumber:row.contactNumber})}>Update</button>
+                                            <button className='deleteBtn' onClick={()=>deleteOrder({customerId:row.customerId})}>Delete</button>
                                         </td>
                                     </tr>
                                 )):(
@@ -89,4 +93,4 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
     );
 }
 
-export default SupplierTable;
+export default SalesConsultantTable;

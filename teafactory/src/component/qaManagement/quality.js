@@ -1,12 +1,14 @@
 
 import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faSearch, faBell, faHome, faWallet, faPeopleGroup, faChartBar, faGear, faCircleQuestion, faSignOut,faComment,faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faSearch, faBell, faHome, faWallet, faPeopleGroup, faChartBar, faGear, faCircleQuestion, faSignOut,faComment,faDollarSign,faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import QulityForm from './qulityForm';
 import './Qulity.css'
 import QuantityTable from './qulityTable';
 import  Axios  from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,LineChart,Line, PieChart, Pie } from 'recharts';
+import { Link,useNavigate } from 'react-router-dom';
+
 
 
 const Quantity=()=>{
@@ -99,18 +101,39 @@ const deleteQulity=(data)=>{
           console.error("Axios error",error);
       })
 }
+
+/////////////////////////////////////////////////////////////
+const [userName, setUserName] = useState('');
+const navigate=useNavigate();
+
+const Logout = () => {
+  localStorage.removeItem('userName');
+  navigate('/login');
+};
+
+useEffect(() => {
+  const name = localStorage.getItem('userName');
+  if (name) {
+    setUserName(name);
+  }
+}, []);
+
 return(
 
   <div className="QAContainer">
   <div className="QATopbar">
-    <div className="QAlogo">
-      <h2>Royal Hotel</h2>
-    </div>
-   
-    <FontAwesomeIcon icon={faBell} />
-    <div className="QAuser">
+
+  <div className="QAuser">
       <img src='/image/TeaFactoryLogo.png' width={50} height={50}/>
     </div>
+    <div className="h2">
+      <h4>Welcome, {userName}!</h4>
+    </div>
+  
+    <div className='notification'>
+      <FontAwesomeIcon icon={faBell}  />
+    </div>
+
   </div>
 
   <div className="QASidebar">
@@ -152,10 +175,15 @@ return(
         </a>
       </li>
       <li>
-        <a href="#">
-        <FontAwesomeIcon icon={faSignOut} />
-          <div className="QAsidemenu7">Log Out</div>
-        </a>
+        <div className='QAsidemenu7'>
+         {userName ? (
+                 <>
+                  <span className="" onClick={Logout}><FontAwesomeIcon icon={faSignInAlt} />&nbsp;&nbsp;&nbsp; Logout</span>
+                </>
+                  ) : (
+                    <Link to="#" ></Link>
+                  )}
+        </div>
       </li>
      
     </ul>
@@ -169,7 +197,7 @@ return(
       <div className="QAchartBox"> 
         <div className="QAchart">
           <ResponsiveContainer width="60%" height={300}>
-            <BarChart data={qulity} margin={{ top: 20, right: 30, left: 60, bottom: 5 }}>
+            <BarChart data={qulity} >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="moisturisingLevel" />
               <YAxis />
@@ -187,14 +215,14 @@ return(
       <div className="QAchartBox"> 
         <div className="QAchart">
         <ResponsiveContainer width="60%" height={300}>
-          <PieChart data={qulity} margin={{ top: 20, right: 30, left: 80, bottom: 5 }}>
+          <PieChart data={qulity} margin={{}}>
             <Tooltip />
             <Legend />
             <Pie 
               data={qulity} 
               dataKey="wight" 
               nameKey="wight" 
-              fill="#8884d8" 
+              fill="Darkblue" 
               label
             />
           </PieChart >
@@ -203,6 +231,32 @@ return(
   
         </div>
       </div>
+
+  <div className="QAchartBox">
+  <div className="QAchart">
+    <ResponsiveContainer width="80%" height={300}>
+      <LineChart
+        data={qulity}
+        margin={{ }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis
+          dataKey="checkDate"
+          tickFormatter={(tick) => {
+            const date = new Date(tick);
+            return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+          }}
+        />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="moisturisingLevel" stroke="Brown" />
+      </LineChart>
+    </ResponsiveContainer>
+  </div>
+</div>
+
+
 
   </div>
         

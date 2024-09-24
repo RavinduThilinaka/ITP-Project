@@ -1,5 +1,5 @@
 import { color } from "framer-motion";
-import './SupplierForm.css';
+import './SalesConsultantForm.css';
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,56 +17,58 @@ const isValidTextChar = (char) => /^[A-Za-z\s]$/.test(char);
 const isValidPrice = (price) => !isNaN(price) && parseFloat(price) > 0;
 const isSecondvalide=(double) => /^\d*\.?\d*$/.test(double);
 
+const SalesConsultantForm=({addOrder,submitted,data,isEdit,updateOrder})=>{
 
-
-const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
-
-    const [sId,setId]=useState(0);
-    const [sName,setName]=useState();
+    const [customerId,setCustomerId]=useState(0);
+    const [customerName,setCustomerName]=useState();
     const [quantity,setQuantity]=useState();
     const [teaType,setTeaType]=useState();
+    const [contactNumber,setContactNumber]=useState();
     const [orderDate,setOrderDate]=useState();
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState();
+    const [address, setAddress] = useState('');
     const [priceError, setPriceError] = useState('');
-    const [nameError, setNameError] = useState('');
+    const [nameError, setCustomerNameError] = useState('');
     const [quantityError, setQuantityError] = useState('');
-    const [teaTypeError, setTeaTypeError] = useState('');
+    const [contactNumberError, setContactNumberError] = useState('');
+    const [addressError, setAddressError] = useState('');
     const [orderDateError, setOrderDateError] = useState('');
+    const [teaTypeError, setTeaTypeError] = useState('');
 
     useEffect(()=>{
         if(!submitted){
             const newId = Math.floor(Math.random() * 10000); 
-            setId(newId);
+            setCustomerId(newId);
             setQuantity('');
-            setTeaType('');
+            setContactNumber('');
             setOrderDate('');
             setPrice('');
         }
     },[submitted])
 
     useEffect(()=>{
-        if(data?.sId && data.sId !==0){
-            setId(data.sId);
-            setName(data.sName);
+        if(data?.customerId && data.customerId !==0){
+            setCustomerId(data.customerId);
+            setCustomerName(data.customerName);
             setQuantity(data.quantity);
-            setTeaType(data.teaType);
+            setContactNumber(data.contactNumber);
             setOrderDate(data.orderDate);
             setPrice(data.price);
-            
+            setAddress(data.address);
         }
     },[data])
 
     const handleNameKeyPress = (e) => {
         if (!isValidTextChar(e.key)) {
             e.preventDefault();
-            setNameError('You can only use characters and spaces.');
+            setCustomerNameError('You can only use characters and spaces.');
         }
     };
 
-    const handlePirceKeyPress = (e) => {
+    const handleContactNumberKeyPress = (e) => {
         if (!isSecondvalide(e.key)) {
             e.preventDefault();
-            setPriceError('The only thing that is allowed are numbers and spaces.');
+            setContactNumberError('The only thing that is allowed are numbers and spaces.');
         }
     };
 
@@ -83,28 +85,37 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
     const handleSubmit = () => {
 
             // Reset error messages
-            setNameError('');
+            setCustomerNameError('');
             setQuantityError('');
-            setTeaTypeError('');
+            setContactNumberError('');
             setOrderDateError('');
 
-            if (!sName) {
-                setNameError("Supplier Name is required.");
+            if (!customerName) {
+                setCustomerNameError("Supplier Name is required.");
             }
             if (!quantity) {
                 setQuantityError("Quantity is required.");
             }
-            if (!teaType) {
-                setTeaTypeError("Tea Type is required.");
+            if (!contactNumber) {
+                setContactNumberError("Tea Type is required.");
             }
             if (!orderDate) {
                 setOrderDateError("Order Date is required.");
             }
+            if(!address) {
+                setAddressError("Address is required.");
+            }
+            if(!teaType) {
+                setTeaTypeError("Tea Type is required.");
+            }
+            if(!price) {
+                setPriceError("Price is required.");
+            }
     
 
-        if (sName && quantity && teaType && orderDate && validatePrice()) {
+        if (customerName && quantity && contactNumber && orderDate && validatePrice()) {
            
-            isEdit ? updateSupplier({ sId, sName, quantity, teaType, orderDate, price }) : addSupplier({ sId, sName, quantity, teaType, orderDate, price });
+            isEdit ? updateOrder({ customerId, customerName, quantity, contactNumber, orderDate, price,teaType,address }) : addOrder({ customerId, customerName, quantity, contactNumber, orderDate, price,address,teaType });
         }
     };
    
@@ -115,7 +126,6 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         <Grid
          spacing={1}
          sx={{
-            backgroundImage: "url('./image/supplier.png')",  
             backgroundColor:"#e6eae6bf",
             backgroundPosition:"center",
             padding: "20px",
@@ -130,7 +140,7 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
          }}>
         <Grid>
             <Typography sx={{fontSize:"30px",marginLeft:"40%",color:"#000000",fontWeight:"1000",fontFamily:""}}>
-                Supplier Order
+                Order Details 
             </Typography>
         </Grid>
               
@@ -139,7 +149,7 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         <Grid 
         spacing={1} 
         sx={{
-            backgroundImage: "url('./image/supplier.png')",   
+         
             backgroundColor: "#e6eae6bf",
             backgroundPosition:"center",
             padding: "30px",
@@ -154,9 +164,21 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         }}>
         
         <Grid item xs={6} sm={0}>
-            <Typography sx={{fontSize:"20px",fontWeight: "bold"}} >Supplier Name</Typography>
-                <div className="input"><input type="text" placeholder="Enter Supplier Name"  onKeyPress={handleNameKeyPress} value={sName} onChange={e=>setName(e.target.value)} required></input></div>
+            <Typography sx={{fontSize:"20px",fontWeight: "bold"}} >Customer Name</Typography>
+                <div className="input"><input type="text" placeholder="Enter Customer Name"   value={customerName} onChange={e=>setCustomerName(e.target.value)} required onKeyPress={handleNameKeyPress}></input></div>
                 {nameError && <Typography sx={{ color: "red" }}>{nameError}</Typography>}
+        </Grid>
+        <Grid item xs={6} sm={0}>
+            <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Contact Number</Typography>
+                <div className="input"><input type="number" placeholder="Enter Contact Number"  value={contactNumber} onChange={e=>setContactNumber(e.target.value)} required onKeyUp={handleContactNumberKeyPress}></input></div>
+                {quantityError && <Typography sx={{ color: "red" }}>{contactNumberError}</Typography>}
+               
+        </Grid>
+
+        <Grid item xs={6} sm={0}>
+            <Typography sx={{fontSize:"20px",fontWeight: "bold"}} >Address</Typography>
+                <div className="input"><input type="text" placeholder="Enter Address"   value={address} onChange={e=>setAddress(e.target.value)} required></input></div>
+                {addressError && <Typography sx={{ color: "red" }}>{addressError}</Typography>}
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Quantity</Typography>
@@ -177,12 +199,12 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Order date</Typography>
-                <div className="input"><input type="date" placeholder="Enter Order date" value={orderDate} min={getCurrentDate()} onChange={e=>setOrderDate(e.target.value)} require></input></div>
+                <div className="input"><input type="date" placeholder="Enter Order date" value={orderDate} min={getCurrentDate()} onChange={e=>setOrderDate(e.target.value)} required></input></div>
                 {orderDateError && <Typography sx={{ color: "red" }}>{orderDateError}</Typography>}
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Price</Typography>
-                <div className="input"><input type="text" placeholder="Enter Price" value={price} onKeyPress={handlePirceKeyPress}  onChange={e=>setPrice(e.target.value)} required></input></div>
+                <div className="input"><input type="text" placeholder="Enter Price" value={price}  onChange={e=>setPrice(e.target.value)} required></input></div>
                 {priceError && <Typography sx={{ color: "red" }}>{priceError}</Typography>}
         </Grid>
 
@@ -201,4 +223,4 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
     );
 
 }
-export default SupplierForm
+export default SalesConsultantForm
