@@ -1,9 +1,9 @@
-import './Supplier.css'
+import './SalesConsultant.css';
 import { IonIcon } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import { logoApple, homeOutline, peopleOutline, chatbubbleOutline, helpOutline, settingsOutline, lockClosedOutline, logOutOutline, eyeOutline, cartOutline, cashOutline, menuOutline, searchOutline, navigate } from 'ionicons/icons';
-import SupplierTable from './supplierTable.js';
-import SupplierForm from './supplierForm.js';
+import SalesConsultantTable from './salesConsultantTable.js';
+import SalesConsultantForm from './salesConsultantForm.js';
 import  Axios  from 'axios';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, Title, Tooltip, Legend, BarElement, BarController, LineElement, LineController,PointElement  } from 'chart.js';
@@ -37,26 +37,26 @@ const toggleSidebar = () => {
     }
 };
 
-const Supplier=()=>{
+const SalesConsultant=()=>{
     
-    const [supplier,setSupplier]=useState([]);
+    const [order,setOrder]=useState([]);
     const [submitted,setSubmitted]=useState(false);
-    const [selectedSupplier,setSelectedSupplier]=useState({});
+    const [selectedOrder,setSelectedOrder]=useState({});
     const [isEdit,setIsEdit]=useState(false);
     const [userName, setUserName] = useState('');
     const navigate = useNavigate();
 
 
     useEffect(()=>{
-        getSupplier();
+        getOrder();
     },[]);
 
 /////////////////////////////////////////////////////////////////////
 
-const getSupplier=()=>{
-    Axios.get('http://localhost:3001/api/supplier')
+const getOrder=()=>{
+    Axios.get('http://localhost:3001/api/order')
         .then(response=>{
-            setSupplier(response.data?.response||[])
+            setOrder(response.data?.response||[])
         })
 
         .catch(error=>{
@@ -66,21 +66,22 @@ const getSupplier=()=>{
 
 ///////////////////////////////////////////////////////////////////
 
-const addSupplier=(data)=>{
+const addOrder=(data)=>{
     setSubmitted(true);
     const payload={
-        sId:data.sId,
-        sName:data.sName,
+        customerId:data.customerId,
+        customerName:data.customerName,
         quantity:data.quantity,
         teaType:data.teaType,
         orderDate:data.orderDate,
         price:data.price,
+        address:data.address,
     }
 
-    Axios.post("http://localhost:3001/api/addSupplier",payload)
+    Axios.post("http://localhost:3001/api/order",payload)
 
         .then(()=>{
-            getSupplier();
+            getOrder();
             setSubmitted(false);
             isEdit(false);
         })
@@ -91,23 +92,24 @@ const addSupplier=(data)=>{
 }
 
 ///////////////////////////////////////////////////////////
-const updateSupplier=(data)=>{
+const updateOrder=(data)=>{
     setSubmitted(true);
 
     const payload={
-        sId:data.sId,
-        sName:data.sName,
+        customerId:data.customerId,
+        customerName:data.customerName,
         quantity:data.quantity,
         teaType:data.teaType,
         orderDate:data.orderDate,
         price:data.price,
+        address:data.address,
     }
 
 
-Axios.post("http://localhost:3001/api/updateSupplier",payload)
+Axios.patch("http://localhost:3001/api/order",payload)
 
     .then(()=>{
-        getSupplier();
+        getOrder();
         setSubmitted(false);
         isEdit(false);
     })
@@ -119,11 +121,15 @@ Axios.post("http://localhost:3001/api/updateSupplier",payload)
 
 ///////////////////////////////////////////////////////////////
 
-const deleteSupplier=(data)=>{
-    Axios.post("http://localhost:3001/api/deleteSupplier",data)
+const deleteOrder=(data)=>{
+
+    const payload ={
+        customerId:data.customerId
+    }
+    Axios.post("http://localhost:3001/api/delete-order",payload)
 
         .then(()=>{
-            getSupplier();
+            getOrder();
         })
 
         .catch(error=>{
@@ -132,7 +138,7 @@ const deleteSupplier=(data)=>{
 }
 
 ////////////////////////////////////////////////////////////////
-const teaTypeData = supplier.reduce((acc, curr) => {
+const teaTypeData = order.reduce((acc, curr) => {
     acc[curr.teaType] = (acc[curr.teaType] || 0) + 1;
     return acc;
 }, {});
@@ -147,7 +153,7 @@ const chartData = {
 };
 
 //////////////////////////////////////////////////////////////////
-const quantity = supplier.reduce((acc, curr) => {
+const quantity = order.reduce((acc, curr) => {
     acc[curr.quantity] = (acc[curr.quantity] || 0) + 1;
     return acc;
 }, {});
@@ -163,7 +169,7 @@ const chartData2 = {
 
 /////////////////////////////////////////////////////////////////
 
-const price = supplier.reduce((acc, curr) => {
+const price = order.reduce((acc, curr) => {
     acc[curr.price] = (acc[curr.price] || 0) + 1;
     return acc;
 }, {});
@@ -299,47 +305,25 @@ const Logout = () => {
                     </div>
                     
                 </div>
-                    
-                <div class="cardBox">
-                    
-                <div className="teaTypeChart">
-                        <h2>Quantity</h2>
-                        <Line data={chartData3} />
-                        
-                    </div>
+        
 
-                    <div className="teaTypeChart">
-                        <h2>Tea Type Distribution</h2>
-                        <Pie data={chartData} />
-                        
-                    </div>
-
-                    
-                    <div className="teaTypeChart">
-                        <h2>Price</h2>
-                        <Bar data={chartData3} />
-                       
-                    </div>
-  
-                </div>
-
-
-                <SupplierForm
-                    addSupplier={addSupplier}
-                    updateSupplier={updateSupplier}
-                    deleteSupplier={deleteSupplier}
+                <SalesConsultantForm
+                    addOrder={addOrder}
+                    updateOrder={updateOrder}
+                    deleteOrder={deleteOrder}
                     submitted={submitted}
-                    data={selectedSupplier}
+                    data={selectedOrder}
                     isEdit={isEdit}
                 /><br></br>
-                <SupplierTable
-                    rows={supplier}
-                    selectedSupplier={data=>{
-                        setSelectedSupplier(data);
+          
+          <SalesConsultantTable
+                    rows={order}
+                    selectedOrder={data=>{
+                        setSelectedOrder(data);
                         setIsEdit(true);
                     }}
 
-                    deleteSupplier={data => window.confirm('Are you sure?') && deleteSupplier(data)}
+                    deleteOrder={data => window.confirm('Are you sure?') && deleteOrder(data)}
                    
                 />
 
@@ -350,4 +334,4 @@ const Logout = () => {
     );
 }
 
-export default Supplier;
+export default SalesConsultant;

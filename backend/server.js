@@ -7,12 +7,13 @@ const mongoose=require('mongoose');
 const router=require('./userManagement/router');
 const router2=require('./supplierManagement/router');
 const router3=require('./qaManagement/router');
+const router4 = require('./consultantManagement/router');
 const cookieParser = require('cookie-parser');
 
 
 app.use(cors({
     origin: 'http://localhost:3000',
-    methods:["GET","POST"],
+    methods:["GET","POST","PATCH","DELETE"],
     credentials: true, 
 }));
 
@@ -27,8 +28,9 @@ const connect=async()=>{
     try{
         await mongoose.connect(uri);
         console.log('Connect to MongoDB');
+
     }catch(error){
-        console.log('MongoDB Errore',error);
+        console.log('MongoDB Error',error);
     }
 };
 
@@ -42,3 +44,4 @@ const server=app.listen(port,host,()=>{
 app.use('/api',router);
 app.use('/api',router2);
 app.use('/api',router3);
+app.use('/api',router4);    

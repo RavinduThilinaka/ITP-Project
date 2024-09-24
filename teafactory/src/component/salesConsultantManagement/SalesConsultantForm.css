@@ -1,0 +1,52 @@
+.input input{
+    border-radius: 6px;
+    height: 40px;
+    width: 100%;
+    border: none;
+    border:1px solid lightgrey;
+    outline:none;
+    color: #000000;
+  }
+  
+.input select{
+    border-radius: 6px;
+    height: 40px;
+    width: 100%;
+    border: none;
+    border:1px solid lightgrey;
+    outline:none;
+    color: #000000;
+  }
+
+
+  .input input:focus{
+      border-color:blue;
+      transition:all 0.5s;
+  }
+  
+  .supplierBtn button{
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1em;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      background-color: #222; 
+      border: 2px solid #000000; 
+      border-radius: 25px;
+      transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-top:10%;
+     
+  }
+  
+  .supplierBtn button:hover{
+      background-color: #333; 
+      border-color: #000000; 
+      transform: scale(1.05); 
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+   
+     
+  }
