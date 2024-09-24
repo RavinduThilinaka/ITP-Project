@@ -34,7 +34,7 @@ const SalesConsultantTable=({rows=[],selectedOrder,deleteOrder})=>{
                 <div class="table_container">
                  <div class="table_container_2">
                         <div class="TableHeader">
-                            <h2>Recent Order</h2>
+                            <h2>Order History</h2>
 
                         <div class="search_box">
                             <label>
