@@ -75,6 +75,7 @@ const addOrder=(data)=>{
         teaType:data.teaType,
         orderDate:data.orderDate,
         price:data.price,
+        contactNumber:data.contactNumber,//contact
         address:data.address,
     }
 
@@ -102,6 +103,7 @@ const updateOrder=(data)=>{
         teaType:data.teaType,
         orderDate:data.orderDate,
         price:data.price,
+        contactNumber:data.contactNumber,
         address:data.address,
     }
 
@@ -216,24 +218,7 @@ const Logout = () => {
                         <span class="title">Tea Factory</span>
                     </a>
                 </li>
-
-                <li>
-                    <a href="/supplier">
-                        <span class="horizontal_box">
-                            <ion-icon icon={homeOutline}></ion-icon>
-                        </span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span class="horizontal_box">
-                            <ion-icon icon={peopleOutline}></ion-icon>
-                        </span>
-                        <span class="title">Customer</span>
-                    </a>
-                </li>
+                
 
                 <li>
                     <a href="/sales-consultant">
@@ -244,41 +229,7 @@ const Logout = () => {
                     </a>
                 </li>
 
-                <li>
-                    <a href="">
-                        <span class="horizontal_box">
-                            <ion-icon icon={chatbubbleOutline}></ion-icon>
-                        </span>
-                        <span class="title">Message</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span class="horizontal_box">
-                            <ion-icon icon={helpOutline}></ion-icon>
-                        </span>
-                        <span class="title">Help</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span class="horizontal_box">
-                            <ion-icon icon={settingsOutline}></ion-icon>
-                        </span>
-                        <span class="title">Setting</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span class="horizontal_box">
-                            <ion-icon icon={lockClosedOutline}></ion-icon>
-                        </span>
-                        <span class="title">Password</span>
-                    </a>
-                </li>
+                
 
                 <li onClick={Logout}>
                     <a href="/login" >

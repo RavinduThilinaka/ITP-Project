@@ -39,7 +39,7 @@ function Login() {
               navigate('/quality');
               break;
             case 'SalesConsaltent':
-              navigate('/service');
+              navigate('/sales-consultant');
               break;
             default:
               navigate('/'); // Default for 'User'
