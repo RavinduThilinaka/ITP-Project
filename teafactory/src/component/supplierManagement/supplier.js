@@ -230,7 +230,7 @@ const Logout = () => {
                 </li>
 
                 <li>
-                    <a href="/sales-consultant">
+                    <a href="#">
                         <span class="horizontal_box">
                             <ion-icon icon={peopleOutline}></ion-icon>
                         </span>
