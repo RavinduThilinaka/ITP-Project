@@ -126,7 +126,7 @@ Axios.patch("http://localhost:3001/api/order",payload)
 const deleteOrder=(data)=>{
 
     const payload ={
-        customerId:data.customerId
+        customerId:data.customerId // * check if customerId exists or is valid before deleting
     }
     Axios.post("http://localhost:3001/api/delete-order",payload)
 
@@ -141,7 +141,7 @@ const deleteOrder=(data)=>{
 
 ////////////////////////////////////////////////////////////////
 const teaTypeData = order.reduce((acc, curr) => {
-    acc[curr.teaType] = (acc[curr.teaType] || 0) + 1;
+    acc[curr.teaType] = (acc[curr.teaType] || 0) + 1;// * Verification every order has a valid `teaType`, no null checks.
     return acc;
 }, {});
 

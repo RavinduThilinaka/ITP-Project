@@ -1,10 +1,8 @@
-import { color } from "framer-motion";
-import './SalesConsultantForm.css';
+import { Container, Grid, Typography, Button, TextField, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import './SalesConsultantForm.css';
 
-const { Container, Grid, Typography, Button } = require("@mui/material");
-
+// * date
 const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
@@ -13,62 +11,26 @@ const getCurrentDate = () => {
     return `${year}-${month}-${day}`;
 };
 
-const isValidTextChar = (char) => /^[A-Za-z\s]$/.test(char);
-const isValidPrice = (price) => !isNaN(price) && parseFloat(price) > 0;
-const isSecondvalide=(double) => /^\d*\.?\d*$/.test(double);
-
-const SalesConsultantForm=({addOrder,submitted,data,isEdit,updateOrder})=>{
-
-    const [customerId,setCustomerId]=useState(0);
-    const [customerName,setCustomerName]=useState();
-    const [quantity,setQuantity]=useState();
-    const [teaType,setTeaType]=useState();
-    const [contactNumber,setContactNumber]=useState();
-    const [orderDate,setOrderDate]=useState();
-    const [price, setPrice] = useState();
+const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder }) => {
+    const [customerId, setCustomerId] = useState(0);
+    const [customerName, setCustomerName] = useState('');
+    const [quantity, setQuantity] = useState('');
+    const [teaType, setTeaType] = useState('');
+    const [contactNumber, setContactNumber] = useState('');
+    const [orderDate, setOrderDate] = useState('');
+    const [price, setPrice] = useState('');
     const [address, setAddress] = useState('');
-    const [priceError, setPriceError] = useState('');
-    const [nameError, setCustomerNameError] = useState('');
+    const [nameError, setNameError] = useState('');
     const [quantityError, setQuantityError] = useState('');
-    const [contactNumberError, setContactNumberError] = useState('');
-    const [addressError, setAddressError] = useState('');
-    const [orderDateError, setOrderDateError] = useState('');
-    const [teaTypeError, setTeaTypeError] = useState('');
+    const [errors, setErrors] = useState({});
+    const [priceError, setPriceError] = useState('');
+    const isValidPrice = (price) => !isNaN(price) && parseFloat(price) > 0;
+    const isSecondvalide=(double) => /^\d*\.?\d*$/.test(double);
 
-    useEffect(()=>{
-        if(!submitted){
-            const newId = Math.floor(Math.random() * 10000); 
-            setCustomerId(newId);
-            setQuantity('');
-            setContactNumber('');
-            setOrderDate('');
-            setPrice('');
-        }
-    },[submitted])
-
-    useEffect(()=>{
-        if(data?.customerId && data.customerId !==0){
-            setCustomerId(data.customerId);
-            setCustomerName(data.customerName);
-            setQuantity(data.quantity);
-            setContactNumber(data.contactNumber);
-            setOrderDate(data.orderDate);
-            setPrice(data.price);
-            setAddress(data.address);
-        }
-    },[data])
-
-    const handleNameKeyPress = (e) => {
-        if (!isValidTextChar(e.key)) {
-            e.preventDefault();
-            setCustomerNameError('You can only use characters and spaces.');
-        }
-    };
-
-    const handleContactNumberKeyPress = (e) => {
+    const handlePirceKeyPress = (e) => {
         if (!isSecondvalide(e.key)) {
             e.preventDefault();
-            setContactNumberError('The only thing that is allowed are numbers and spaces.');
+            setPriceError('The only thing that is allowed are numbers.');
         }
     };
 
@@ -79,149 +41,196 @@ const SalesConsultantForm=({addOrder,submitted,data,isEdit,updateOrder})=>{
             return false;
         }
         setPriceError('');
-        return true;
+        return true;
+    };
+
+    const handleQuantityChange = (e) => {
+        const value = e.target.value;
+        if (parseFloat(value) < 0) {
+            setQuantityError('Quantity cannot be negative.');
+        } else {
+            setQuantityError('');
+            setQuantity(value);
+        }
+    };
+
+    const isValidTextChar = (char) => /^[A-Za-z\s]$/.test(char);
+    const handleNameKeyPress = (e) => {
+        if (!isValidTextChar(e.key)) {
+            e.preventDefault();
+            setNameError('You can only use characters and spaces.');
+        } else {
+            setNameError(''); // Clear the error when valid input is given
+        }
+    };
+
+    useEffect(() => {
+        if (!submitted) {
+            const newId = Math.floor(Math.random() * 10000);
+            setCustomerId(newId);
+            resetForm();
+        }
+    }, [submitted]);
+
+    //BE T FE
+    useEffect(() => {
+        if (data?.customerId && data.customerId !== 0) {
+            setCustomerId(data.customerId);
+            setCustomerName(data.customerName);
+            setQuantity(data.quantity);
+            setContactNumber(data.contactNumber);
+            setOrderDate(data.orderDate);
+            setPrice(data.price);
+            setAddress(data.address);
+        }
+    }, [data]);
+
+    const resetForm = () => {
+        setCustomerName('');
+        setQuantity('');
+        setContactNumber('');
+        setOrderDate('');
+        setPrice('');
+        setAddress('');
+        setTeaType('');
+        setNameError('');
+    };
+
+    //*
+    const validateFields = () => {
+        const newErrors = {};
+        if (!customerName) newErrors.customerName = "Customer Name is required.";
+        if (!quantity) newErrors.quantity = "Quantity is required.";
+        if (!teaType) newErrors.teaType = "Tea Type is required.";
+        if (!contactNumber) newErrors.contactNumber = "Contact Number is required.";
+        if (!orderDate) newErrors.orderDate = "Order Date is required.";
+        if (!address) newErrors.address = "Address is required.";
+        if (!price || isNaN(price) || price <= 0) newErrors.price = "Price must be a valid number and greater than 0.";
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = () => {
-
-            // Reset error messages
-            setCustomerNameError('');
-            setQuantityError('');
-            setContactNumberError('');
-            setOrderDateError('');
-
-            if (!customerName) {
-                setCustomerNameError("Supplier Name is required.");
-            }
-            if (!quantity) {
-                setQuantityError("Quantity is required.");
-            }
-            if (!contactNumber) {
-                setContactNumberError("Tea Type is required.");
-            }
-            if (!orderDate) {
-                setOrderDateError("Order Date is required.");
-            }
-            if(!address) {
-                setAddressError("Address is required.");
-            }
-            if(!teaType) {
-                setTeaTypeError("Tea Type is required.");
-            }
-            if(!price) {
-                setPriceError("Price is required.");
-            }
-    
-
-        if (customerName && quantity && contactNumber && orderDate && validatePrice()) {
-           
-            isEdit ? updateOrder({ customerId, customerName, quantity, contactNumber, orderDate, price,teaType,address }) : addOrder({ customerId, customerName, quantity, contactNumber, orderDate, price,address,teaType });
+        if (validateFields() && validatePrice()){
+            const orderData = { customerId, customerName, quantity, teaType, contactNumber, orderDate, price, address };
+            isEdit ? updateOrder(orderData) : addOrder(orderData);
         }
     };
-   
 
-    return(
-
-    <Container>
-        <Grid
-         spacing={1}
-         sx={{
-            backgroundImage: "url('./image/supplier.png')",  
-            backgroundColor:"#e6eae6bf",
-            backgroundPosition:"center",
-            padding: "20px",
-            borderRadius: "10px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)",
-            marginTop:"12px",
-            width:"90%",
-            borderBottom:"3px solid #131313",
-            marginLeft:"50px"
-          
-
-         }}>
-        <Grid>
-            <Typography sx={{fontSize:"30px",marginLeft:"40%",color:"#000000",fontWeight:"1000",fontFamily:""}}>
-                Order Details 
+    return (
+        <Container sx={{ padding: "20px", maxWidth: "800px", background: "linear-gradient(145deg, #f3f3f3, #e2e2e2)", borderRadius: "10px", boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)", marginTop: "30px" }}>
+            <Typography variant="h4" sx={{ textAlign: "center", color: "#333", marginBottom: "20px", fontWeight: 700 }}>
+                Order Details
             </Typography>
-        </Grid>
-              
-        </Grid>
-
-        <Grid 
-        spacing={1} 
-        sx={{
-            backgroundImage: "url('./image/supplier.png')",   
-            backgroundColor: "#e6eae6bf",
-            backgroundPosition:"center",
-            padding: "30px",
-            borderRadius: "10px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)",
-            marginTop:"12px",
-            width:"90%",
-            color:"#222",
-            borderBottom:"3px solid #131313",
-            marginLeft:"50px",
-            marginTop:"30px"
-        }}>
-        
-        <Grid item xs={6} sm={0}>
-            <Typography sx={{fontSize:"20px",fontWeight: "bold"}} >Customer Name</Typography>
-                <div className="input"><input type="text" placeholder="Enter Customer Name"   value={customerName} onChange={e=>setCustomerName(e.target.value)} required onKeyPress={handleNameKeyPress}></input></div>
-                {nameError && <Typography sx={{ color: "red" }}>{nameError}</Typography>}
-        </Grid>
-        <Grid item xs={6} sm={0}>
-            <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Contact Number</Typography>
-                <div className="input"><input type="number" placeholder="Enter Contact Number"  value={contactNumber} onChange={e=>setContactNumber(e.target.value)} required onKeyUp={handleContactNumberKeyPress}></input></div>
-                {quantityError && <Typography sx={{ color: "red" }}>{contactNumberError}</Typography>}
-               
-        </Grid>
-
-        <Grid item xs={6} sm={0}>
-            <Typography sx={{fontSize:"20px",fontWeight: "bold"}} >Address</Typography>
-                <div className="input"><input type="text" placeholder="Enter Address"   value={address} onChange={e=>setAddress(e.target.value)} required></input></div>
-                {addressError && <Typography sx={{ color: "red" }}>{addressError}</Typography>}
-        </Grid>
-        <Grid item xs={6} sm={0}>
-            <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Quantity</Typography>
-                <div className="input"><input type="number" placeholder="Enter Quantity"  value={quantity} onChange={e=>setQuantity(e.target.value)} required></input></div>
-                {quantityError && <Typography sx={{ color: "red" }}>{quantityError}</Typography>}
-               
-        </Grid>
-        <Grid item xs={6} sm={0}>
-            <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Tea type</Typography>
-                <div className="input"><select  value={teaType} onChange={e=>setTeaType(e.target.value)} style={{ fontWeight: "normal" }}>
-                    <option>-----Select Tea Type----</option>
-                    <option value="Black Tea">Black Tea</option>
-                    <option value="Green Tea">Green Tea</option>
-                    <option value="Oolong Tea">Oolong Tea</option>
-                    <option value="Herbal infusion">Herbal infusion</option>
-                </select></div>
-                {teaTypeError && <Typography sx={{ color: "red" }}>{teaTypeError}</Typography>}
-        </Grid>
-        <Grid item xs={6} sm={0}>
-            <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Order date</Typography>
-                <div className="input"><input type="date" placeholder="Enter Order date" value={orderDate} min={getCurrentDate()} onChange={e=>setOrderDate(e.target.value)} required></input></div>
-                {orderDateError && <Typography sx={{ color: "red" }}>{orderDateError}</Typography>}
-        </Grid>
-        <Grid item xs={6} sm={0}>
-            <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Price</Typography>
-                <div className="input"><input type="text" placeholder="Enter Price" value={price}  onChange={e=>setPrice(e.target.value)} required></input></div>
-                {priceError && <Typography sx={{ color: "red" }}>{priceError}</Typography>}
-        </Grid>
-
-        <Grid>
-           <Typography sx={{marginLeft:"42%"}} className="supplierBtn">
-                <button onClick={handleSubmit}>
-                    {
-                    isEdit? 'Update' : 'Submit'
-                    }
-            </button>
-           </Typography>
-        </Grid>
-            
-        </Grid>
-    </Container>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        fullWidth 
+                        label="Customer Name" 
+                        variant="outlined" 
+                        value={customerName} 
+                        onChange={(e) => setCustomerName(e.target.value)} 
+                        error={!!errors.customerName}
+                        helperText={errors.customerName}
+                        onKeyPress={handleNameKeyPress}
+                    />
+                    {errors.sName && <Typography sx={{ color: "red" }}>{errors.sName}</Typography>}
+                    {nameError && <Typography sx={{ color: "red" }}>{nameError}</Typography>} {/* Display name error */}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        fullWidth 
+                        label="Contact Number" 
+                        type="number" 
+                        variant="outlined" 
+                        value={contactNumber} 
+                        onChange={(e) => setContactNumber(e.target.value)} 
+                        error={!!errors.contactNumber}
+                        helperText={errors.contactNumber}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        fullWidth 
+                        label="Address" 
+                        variant="outlined" 
+                        value={address} 
+                        onChange={(e) => setAddress(e.target.value)} 
+                        error={!!errors.address}
+                        helperText={errors.address}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        fullWidth 
+                        label="Quantity (Kg)" 
+                        type="number" 
+                        variant="outlined" 
+                        value={quantity} 
+                        onChange={handleQuantityChange} 
+                        error={!!errors.quantity}
+                        helperText={errors.quantity}
+                    />
+                     {quantityError && <Typography sx={{ color: "red" }}>{quantityError}</Typography>}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <FormControl fullWidth error={!!errors.teaType}>
+                        <InputLabel>Tea Type</InputLabel>
+                        <Select
+                            value={teaType}
+                            onChange={(e) => setTeaType(e.target.value)}
+                            label="Tea Type"
+                        >
+                            <MenuItem value="Black Tea">Black Tea</MenuItem>
+                            <MenuItem value="Green Tea">Green Tea</MenuItem>
+                            <MenuItem value="Oolong Tea">Oolong Tea</MenuItem>
+                            <MenuItem value="Herbal Infusion">Herbal Infusion</MenuItem>
+                        </Select>
+                        {errors.teaType && <Typography sx={{ color: "red", fontSize: "12px" }}>{errors.teaType}</Typography>}
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        fullWidth 
+                        label="Order Date" 
+                        type="date" 
+                        variant="outlined" 
+                        value={orderDate} 
+                        onChange={(e) => setOrderDate(e.target.value)} 
+                        InputLabelProps={{ shrink: true }} 
+                        error={!!errors.orderDate}
+                        helperText={errors.orderDate}
+                        inputProps={{ min: getCurrentDate() }}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField 
+                        fullWidth 
+                        label="Price (LKR)" 
+                        type="number" 
+                        variant="outlined" 
+                        value={price} 
+                        onChange={(e) => setPrice(e.target.value)}
+                        onKeyPress={handlePirceKeyPress} 
+                        error={!!errors.price}
+                        helperText={errors.price}
+                    />
+                </Grid>
+            </Grid>
+            <Grid container justifyContent="center" sx={{ marginTop: "30px" }}>
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    size="large" 
+                    style={{ backgroundColor: '#168145', color: '#fff' }}
+                    onClick={handleSubmit}
+                    sx={{ backgroundColor: "#4caf50", ":hover": { backgroundColor: "#45a049" }, width: "200px" }}
+                >
+                    {isEdit ? 'Update Order' : 'Submit Order'}
+                </Button>
+            </Grid>
+        </Container>
     );
+};
 
-}
-export default SalesConsultantForm
+export default SalesConsultantForm;
