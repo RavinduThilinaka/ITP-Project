@@ -22,10 +22,12 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
     const [leafType,setLeafType]=useState();
     const [moisturisingError, setMoisturisingError] = useState('');
     const [errors, setErrors] = useState({});
+    const [nameError, setNameError] = useState('');
+    const [weightError, setWeightError] = useState('');
 
     useEffect(()=>{
         if(!submitted){
-            const newId = Math.floor(Math.random() * 10000); // Example: Random ID between 0 and 9999
+            const newId = Math.floor(Math.random() * 10000); 
             setId(newId);
             setName('');
             setMoisturisingLevel('');
@@ -55,6 +57,8 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
         setDate('');
         setLeafType('');
         setErrors({});
+        setNameError(''); 
+        setWeightError(''); // Reset weight error
     };
 
     const validateMoisturisingLevel = (level) => {
@@ -64,6 +68,7 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
     const handleNameKeyPress = (e) => {
         if (!isValidTextChar(e.key)) {
             e.preventDefault();
+            setNameError('You can only use characters and spaces.');
         }
     };
 
@@ -74,6 +79,16 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
             setMoisturisingError('');
         } else {
             setMoisturisingError('Moisturising level must be between 0 and 100.');
+        }
+    };
+
+    const handleWeightChange = (e) => {
+        const value = e.target.value;
+        if (Number(value) >= 0) {
+            setWight(value);
+            setWeightError(''); // Clear error if weight is valid
+        } else {
+            setWeightError('Weight cannot be a negative number.'); // Set error message for negative weight
         }
     };
 
@@ -142,6 +157,7 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
             <Typography sx={{fontSize:"20px"}} >Supplier Name</Typography>
                 <div className="input"><input type="text" placeholder="Enter Supplier Name" onKeyPress={handleNameKeyPress} value={sName} onChange={e=>setName(e.target.value)}></input></div>
                 {errors.sName && <Typography sx={{ color: "red" }}>{errors.sName}</Typography>}
+                {nameError && <Typography sx={{ color: "red" }}>{nameError}</Typography>} {/* Display name error */}
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}}>Moisturising level</Typography>
@@ -151,7 +167,8 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
        
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}}>Weight</Typography>
-                <div className="input"><input type="number" placeholder="Enter Weight" value={wight} onChange={e=>setWight(e.target.value)}></input></div>
+                <div className="input"><input type="number" placeholder="Enter Weight" value={wight} onChange={handleWeightChange} maxLength={6}></input></div>
+                {weightError && <Typography sx={{ color: "red" }}>{weightError}</Typography>}
                 {errors.weight && <Typography sx={{ color: "red" }}>{errors.weight}</Typography>}
         </Grid>
 
