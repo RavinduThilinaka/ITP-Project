@@ -7,6 +7,7 @@ import { searchOutline } from 'ionicons/icons';
 import { color } from 'framer-motion';
 
 
+
 const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
 
     const ComponentsRef=useRef();
@@ -46,7 +47,14 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
 
                             <a href="#" class="btn">View All</a>
                         </div>
-                        <table ref={ComponentsRef}>
+
+                         {/* Add your logo here */}
+                    <div className="logo_container" ref={ComponentsRef}>
+                        <img src="/image/TeaFactoryLogo.png" alt="Company Logo" className="companyLogo" width={50} height={50} />
+                            <div className='LeafLink'>
+                            <h2>LeafLink</h2>
+                            </div>
+                        <table>
                             <thead>
                                 <tr>
                                     <th>Supplier Name</th>
@@ -81,6 +89,7 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
 
                             </tbody>
                         </table>
+                        </div>
                         <Button onClick={handlePrint} className="btn">Downlode Report</Button>
                     </div>
                 </div>

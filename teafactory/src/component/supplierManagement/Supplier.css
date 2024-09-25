@@ -573,3 +573,8 @@ table tbody tr:nth-of-type(even) {
     font-weight: bold;
     cursor: pointer;
 }
+
+.LeafLink{
+    text-align: center;
+    font-size:20px;
+}
