@@ -2,6 +2,7 @@ import { Container, Grid, Typography, Button, TextField, MenuItem, Select, Input
 import { useEffect, useState } from "react";
 import './SalesConsultantForm.css';
 
+// * date
 const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
@@ -19,8 +20,49 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
     const [orderDate, setOrderDate] = useState('');
     const [price, setPrice] = useState('');
     const [address, setAddress] = useState('');
-
+    const [nameError, setNameError] = useState('');
+    const [quantityError, setQuantityError] = useState('');
     const [errors, setErrors] = useState({});
+    const [priceError, setPriceError] = useState('');
+    const isValidPrice = (price) => !isNaN(price) && parseFloat(price) > 0;
+    const isSecondvalide=(double) => /^\d*\.?\d*$/.test(double);
+
+    const handlePirceKeyPress = (e) => {
+        if (!isSecondvalide(e.key)) {
+            e.preventDefault();
+            setPriceError('The only thing that is allowed are numbers.');
+        }
+    };
+
+
+    const validatePrice = () => {
+        if (!isValidPrice(price)) {
+            setPriceError('The price must be more than zero.');
+            return false;
+        }
+        setPriceError('');
+        return true;
+    };
+
+    const handleQuantityChange = (e) => {
+        const value = e.target.value;
+        if (parseFloat(value) < 0) {
+            setQuantityError('Quantity cannot be negative.');
+        } else {
+            setQuantityError('');
+            setQuantity(value);
+        }
+    };
+
+    const isValidTextChar = (char) => /^[A-Za-z\s]$/.test(char);
+    const handleNameKeyPress = (e) => {
+        if (!isValidTextChar(e.key)) {
+            e.preventDefault();
+            setNameError('You can only use characters and spaces.');
+        } else {
+            setNameError(''); // Clear the error when valid input is given
+        }
+    };
 
     useEffect(() => {
         if (!submitted) {
@@ -30,6 +72,7 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
         }
     }, [submitted]);
 
+    //BE T FE
     useEffect(() => {
         if (data?.customerId && data.customerId !== 0) {
             setCustomerId(data.customerId);
@@ -50,8 +93,10 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
         setPrice('');
         setAddress('');
         setTeaType('');
+        setNameError('');
     };
 
+    //*
     const validateFields = () => {
         const newErrors = {};
         if (!customerName) newErrors.customerName = "Customer Name is required.";
@@ -66,7 +111,7 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
     };
 
     const handleSubmit = () => {
-        if (validateFields()) {
+        if (validateFields() && validatePrice()){
             const orderData = { customerId, customerName, quantity, teaType, contactNumber, orderDate, price, address };
             isEdit ? updateOrder(orderData) : addOrder(orderData);
         }
@@ -87,7 +132,10 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
                         onChange={(e) => setCustomerName(e.target.value)} 
                         error={!!errors.customerName}
                         helperText={errors.customerName}
+                        onKeyPress={handleNameKeyPress}
                     />
+                    {errors.sName && <Typography sx={{ color: "red" }}>{errors.sName}</Typography>}
+                    {nameError && <Typography sx={{ color: "red" }}>{nameError}</Typography>} {/* Display name error */}
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField 
@@ -119,10 +167,11 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
                         type="number" 
                         variant="outlined" 
                         value={quantity} 
-                        onChange={(e) => setQuantity(e.target.value)} 
+                        onChange={handleQuantityChange} 
                         error={!!errors.quantity}
                         helperText={errors.quantity}
                     />
+                     {quantityError && <Typography sx={{ color: "red" }}>{quantityError}</Typography>}
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <FormControl fullWidth error={!!errors.teaType}>
@@ -161,7 +210,8 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
                         type="number" 
                         variant="outlined" 
                         value={price} 
-                        onChange={(e) => setPrice(e.target.value)} 
+                        onChange={(e) => setPrice(e.target.value)}
+                        onKeyPress={handlePirceKeyPress} 
                         error={!!errors.price}
                         helperText={errors.price}
                     />

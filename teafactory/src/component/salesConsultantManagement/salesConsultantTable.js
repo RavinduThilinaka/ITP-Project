@@ -39,7 +39,15 @@ const SalesConsultantTable = ({ rows = [], selectedOrder, deleteOrder }) => {
                         </div>
                         <Button className="btn">View All</Button>
                     </div>
-                    <table ref={ComponentsRef}>
+                    
+                    <div ref={ComponentsRef}>
+                    <img src="/image/TeaFactoryLogo.png" alt="Company Logo" className="companyLogo" width={50} height={50} />
+                            
+                            <div className='LeafLink'>
+                                <h2>LeafLink</h2>
+                            </div>
+
+                    <table >
                         <thead>
                             <tr>
                                 <th>Customer Name</th>
@@ -97,6 +105,9 @@ const SalesConsultantTable = ({ rows = [], selectedOrder, deleteOrder }) => {
                             }
                         </tbody>
                     </table>
+                    
+                    </div>
+
                     <Button onClick={handlePrint} className="btn" variant="contained" color="primary">
                         Download Report
                     </Button>
