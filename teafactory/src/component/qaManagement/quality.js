@@ -147,7 +147,7 @@ return(
       <li>
         <a href="#">
         <FontAwesomeIcon icon={faUser} />
-          <div className="QAsidemenu2">Profile</div>
+          <div className="QAsidemenu2"  onClick={() => navigate('/profile')}>Profile</div>
         </a>
       </li>
       <li>

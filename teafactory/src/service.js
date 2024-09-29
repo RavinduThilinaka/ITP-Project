@@ -19,7 +19,7 @@ function ServicePage(){
                     </div>
                     <nav>
                         <Link to="/" className="nav-link"><FontAwesomeIcon icon={faHome} /> Home</Link>
-                        <Link to="/" className="nav-link"><FontAwesomeIcon icon={faUser} /> Profile</Link>
+                        <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faUser} /> Profile</Link>
                         <Link to="/service" className="nav-link"><FontAwesomeIcon icon={faConciergeBell} /> Services</Link>
                         <Link to="/contactus" className="nav-link"><FontAwesomeIcon icon={faEnvelope} /> Contact</Link>
                         <Link to="/register" className="nav-link"><FontAwesomeIcon icon={faUserPlus} /> SignUp</Link>
