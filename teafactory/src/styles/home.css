@@ -426,3 +426,55 @@ header nav span:hover {
     5px 5px 5px rgba(249, 248, 248, 0.538); 
    
 }
+
+.loading {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1000; 
+    color: #fff;
+    font-size: 35px;
+   
+  }
+
+  .loading .p{
+    color: #f1f0f0;
+    margin-right: 25px;
+  }
+  
+  .progress-bar {
+    width: 80%; 
+    margin-top: 20px; 
+    height: 20px; 
+  }
+  
+ 
+  progress[value] {
+    appearance: none; 
+    border: none; 
+    background-color: #e0e0e0; 
+    border-radius: 5px; 
+  }
+  
+  progress[value]::-webkit-progress-bar {
+    background-color: #e0e0e0; 
+    border-radius: 5px; 
+  }
+  
+  progress[value]::-webkit-progress-value {
+    background-color: #4CAF50; 
+    border-radius: 5px;
+  }
+  
+  progress[value]::-moz-progress-bar {
+    background-color: #4CAF50; 
+    border-radius: 5px; 
+  }
+  
