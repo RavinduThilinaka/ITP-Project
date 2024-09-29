@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link  } from 'react-router-dom';
 import './profile.css';
 
 const Profile = () => {
@@ -7,8 +8,16 @@ const Profile = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [filesVisible, setFilesVisible] = useState(false);
+ 
 
   // Date and Time Display Functionality
+
+  const userName = localStorage.getItem('userName');
+  const userEmail = localStorage.getItem('userEmail');
+  const userType = localStorage.getItem('userType');
+  const userGender = localStorage.getItem('userGender');
+ 
+
   useEffect(() => {
     const displayDateTime = () => {
       const now = new Date();
@@ -62,10 +71,16 @@ const Profile = () => {
   return (
     <div className="bodyContainer">
       <div className="profile-container">
+        
         <div className="card">
+        <Link to="/" className="close-icon-link">
+              <span className="close-icon">✖</span>
+            </Link>
           {/* Date and Time Display */}
-          <div className="date-time">{dateTime}</div>
-
+          <div className="date-time">{dateTime}
+           
+          </div>
+              
           <div className="profile-header">
             <div className="profile-image">
               <img src="/image/profile-img.jpg" alt="Profile" />
@@ -83,13 +98,13 @@ const Profile = () => {
           <div className="profile-body">
             <div className="profile">
               <div className='h3'>About Me</div>
-              <label>Name:</label>
+              <label>Name: {userName}</label>
               <br />
-              <label>Email:</label>
+              <label>Email: {userEmail}</label>
               <br />
-              <label>Gender:</label>
+              <label>Gender: {userGender}</label>
               <br />
-              <label>Password:</label>
+              <label>Role: {userType}</label>
               <br />
             </div>
 
@@ -148,10 +163,13 @@ const Profile = () => {
                   <li>Image2.jpg</li>
                   <li>Presentation.pptx</li>
                 </ul>
+                
               </div>
             )}
           </div>
+
         </div>
+              
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-const {response, resource}=require('./app');
+const {response, resource, use}=require('./app');
 const User=require('./model');
 const  bcrypt =require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -46,14 +46,14 @@ const loginUsers=(req,res)=>{
             if(user){
                
                 if(response){
-                    const token = jwt.sign({ email: user.email,userType: user.userType,name: user.name,  }, "jwt-secret-key", { expiresIn: "1d" });
+                    const token = jwt.sign({ email: user.email,userType: user.userType,name: user.name,gender:user.gender}, "jwt-secret-key", { expiresIn: "1d" });
                     res.cookie("token", token, {
                         httpOnly: true,
                         secure: false, 
                         sameSite: 'Lax',
                     });
                    
-                   return  res.json({message: "Success!!!", userType: user.userType,name: user.name,})
+                   return  res.json({message: "Success!!!", userType: user.userType,name: user.name,email:user.email,gender:user.gender})
                 }else{
                     return res.status(400).json({ message: "Password is incorrect" });
                 }
