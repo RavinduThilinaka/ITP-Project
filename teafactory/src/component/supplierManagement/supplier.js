@@ -294,7 +294,7 @@ const Logout = () => {
                     
                             <div className='supplierName'><h4>Welcome, {userName}!</h4></div>
              
-                    <div class="userProfile">
+                    <div class="userProfile" onClick={() => navigate('/profile')}>
                         <img src="./image/profile.jpg"/>
                     </div>
                     

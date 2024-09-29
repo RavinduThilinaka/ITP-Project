@@ -86,7 +86,7 @@ const Profile = () => {
               <img src="/image/profile-img.jpg" alt="Profile" />
             </div>
             <div className="profile-info">
-              <h2 className="profile-name">John Doe</h2>
+              <h2 className="profile-name">{userName}</h2>
               <p className="profile-bio">Web Developer & Designer | Passionate about creating beautiful and interactive user experiences.</p>
               <div className="profile-links">
                 <button className="updateButton">Update</button>
