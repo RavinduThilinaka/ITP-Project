@@ -204,7 +204,7 @@ const Logout = () => {
 
                 <li>
                     <a href="#">
-                        <span class="horizontal_box" onClick={() => navigate('/profile')}>
+                        <span class="horizontal_box" >
                             <img src='/image/TeaFactoryLogo.png' width={50} height={50}/>
                         </span>
                         <span class="title">Tea Factory</span>
@@ -294,7 +294,7 @@ const Logout = () => {
                     
                             <div className='supplierName'><h4>Welcome, {userName}!</h4></div>
              
-                    <div class="userProfile">
+                    <div class="userProfile" onClick={() => navigate('/profile')}>
                         <img src="./image/profile.jpg"/>
                     </div>
                     
