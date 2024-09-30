@@ -204,7 +204,7 @@ const Logout = () => {
 
                 <li>
                     <a href="#">
-                        <span class="horizontal_box">
+                        <span class="horizontal_box" onClick={() => navigate('/profile')}>
                             <img src='/image/TeaFactoryLogo.png' width={50} height={50}/>
                         </span>
                         <span class="title">Tea Factory</span>
