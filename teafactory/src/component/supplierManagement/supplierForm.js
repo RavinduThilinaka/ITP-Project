@@ -14,10 +14,12 @@ const getCurrentDate = () => {
 };
 
 const isValidTextChar = (char) => /^[A-Za-z\s]$/.test(char);
-const isValidPrice = (price) => !isNaN(price) && parseFloat(price) > 0;
+const isValidPrice = (price) => !isNaN(price) && parseFloat(price.replace(/,/g, '')) > 0;
 const isSecondvalide=(double) => /^\d*\.?\d*$/.test(double);
 
-
+const formatPrice = (price) => {
+    return new Intl.NumberFormat().format(price);  // This will format the price with commas
+};
 
 const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
 
@@ -51,7 +53,7 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
             setQuantity(data.quantity);
             setTeaType(data.teaType);
             setOrderDate(data.orderDate);
-            setPrice(data.price);
+            setPrice(formatPrice(data.price));
             
         }
     },[data])
@@ -72,12 +74,23 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
 
 
     const validatePrice = () => {
-        if (!isValidPrice(price)) {
+        const numericPrice = price.replace(/,/g, '');  // Remove commas before validation
+        if (!isValidPrice(numericPrice)) {
             setPriceError('The price must be more than zero.');
             return false;
         }
         setPriceError('');
         return true;
+    };
+
+    const handlePriceChange = (e) => {
+        const value = e.target.value.replace(/,/g, '');  // Remove existing commas
+        if (isSecondvalide(value)) {
+            setPrice(formatPrice(value));  // Format and update price with commas
+            setPriceError('');
+        } else {
+            setPriceError('Invalid price format.');
+        }
     };
 
     const handleQuantityKeyPress = (e) => {
@@ -122,8 +135,8 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
     
 
         if (sName && quantity && teaType && orderDate && validatePrice()) {
-           
-            isEdit ? updateSupplier({ sId, sName, quantity, teaType, orderDate, price }) : addSupplier({ sId, sName, quantity, teaType, orderDate, price });
+            const numericPrice = price.replace(/,/g, '');
+            isEdit ? updateSupplier({ sId, sName, quantity, teaType, orderDate, price: numericPrice }) : addSupplier({ sId, sName, quantity, teaType, orderDate, price: numericPrice });
         }
     };
    
@@ -196,12 +209,12 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Order date</Typography>
-                <div className="input"><input type="date" placeholder="Enter Order date" value={orderDate} min={getCurrentDate()} onChange={e=>setOrderDate(e.target.value)} require></input></div>
+                <div className="input"><input type="date" placeholder="Enter Order date" value={orderDate} min={getCurrentDate()} onChange={e=>setOrderDate(e.target.value)} onFocus={(e) => e.target.showPicker()}require></input></div>
                 {orderDateError && <Typography sx={{ color: "red" }}>{orderDateError}</Typography>}
         </Grid>
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px",fontWeight: "bold"}}>Price</Typography>
-                <div className="input"><input type="text" placeholder="Enter Price" value={price} onKeyPress={handlePirceKeyPress}  onChange={e=>setPrice(e.target.value)} required></input></div>
+                <div className="input"><input type="text" placeholder="Enter Price" value={price} onKeyPress={handlePirceKeyPress}  onChange={handlePriceChange} required></input></div>
                 {priceError && <Typography sx={{ color: "red" }}>{priceError}</Typography>}
         </Grid>
 
