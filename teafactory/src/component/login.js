@@ -43,7 +43,7 @@ function Login() {
               navigate('/sales-consultant');
               break;
             case 'Manager':
-              navigate('/supplierForm');
+              navigate('/service');
               break;
 
             default:
