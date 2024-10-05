@@ -92,7 +92,7 @@ function Register(){
                         <option value="Supplier">Supplier</option>
                         <option value="QaManager">Qa Manager</option>
                         <option value="SalesConsaltent">Salase Consaltent</option>
-                        <option value="Manager">Salase Consaltent</option>
+                        <option value="Manager">Manager</option>
                   </select>
               </div>
             
