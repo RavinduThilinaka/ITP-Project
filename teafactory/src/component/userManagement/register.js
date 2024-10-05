@@ -55,7 +55,7 @@ function Register(){
     if (password !== confirmPassword) {
       formErrors.confirmPassword = 'Passwords do not match';
     }
-    if ((userType === 'Admin' || userType === 'Supplier' || userType === 'QaManager' || userType === 'SalesConsultant') && secretKey !== 'teafactory') {
+    if ((userType === 'Admin' || userType === 'Supplier' || userType === 'QaManager' || userType === 'SalesConsultant'|| userType === 'Manager') && secretKey !== 'teafactory') {
       formErrors.secretKey = 'Incorrect secret key for this role';
     }
 
@@ -92,10 +92,11 @@ function Register(){
                         <option value="Supplier">Supplier</option>
                         <option value="QaManager">Qa Manager</option>
                         <option value="SalesConsaltent">Salase Consaltent</option>
+                        <option value="Manager">Salase Consaltent</option>
                   </select>
               </div>
             
-            {userType=="Admin"|| userType === "Supplier"|| userType === "QaManager"|| userType === "SalesConsaltent"?(
+            {userType=="Admin"|| userType === "Supplier"|| userType === "QaManager"|| userType === "SalesConsaltent"|| userType === "Manager"?(
               <div className="input-field" >
               <i> <FontAwesomeIcon icon={faKey} /></i>
                 <input 

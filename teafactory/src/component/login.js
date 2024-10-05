@@ -42,6 +42,10 @@ function Login() {
             case 'SalesConsaltent':
               navigate('/sales-consultant');
               break;
+            case 'Manager':
+              navigate('/supplierForm');
+              break;
+
             default:
               navigate('/'); // Default for 'User'
           }
