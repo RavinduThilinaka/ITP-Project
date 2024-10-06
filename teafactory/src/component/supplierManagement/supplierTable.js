@@ -90,7 +90,7 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
                         <Button onClick={handlePrint} className="btn">Downlode Report</Button>
                     </div>
                 </div>
-
+                </div>
                 
         </div>
     );
