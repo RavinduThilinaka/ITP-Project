@@ -18,6 +18,7 @@ import ServicePage from './service';
 import ContactUs from './component/contactManagement/contact';
 import SalesConsultant from './component/salesConsultantManagement/salesConsultant';
 import Profile from './component/userManagement/profile';
+import AdminDashboard from './component/adminManagement/adminDashoboard';
 
 
 
@@ -39,6 +40,7 @@ root.render(
       <Route path='/service' element={<ServicePage/>}/>
       <Route path='/contactus' element={<ContactUs/>}/>
       <Route path='/profile' element={<Profile/>}/>
+      <Route path='/admin' element={<AdminDashboard/>}/>
     </Routes>
 </BrowserRouter>
 );
