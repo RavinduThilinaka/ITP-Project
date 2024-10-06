@@ -48,12 +48,12 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
                             <a href="#" class="btn">View All</a>
                         </div>
 
-                         {/* Add your logo here */}
+                         
                     <div className="logo_container" ref={ComponentsRef}>
-                        <img src="/image/TeaFactoryLogo.png" alt="Company Logo" className="companyLogo" width={50} height={50} />
-                            <div className='LeafLink'>
-                            <h2>LeafLink</h2>
-                            </div>
+                        <div className='LeafLink' style={{ display: 'flex', alignItems: 'center' }}>
+                            <h2 style={{ margin: 0,marginLeft:'40%' }} t>LeafLink </h2>
+                            <img src="/image/TeaFactoryLogo.png" alt="Company Logo" className="companyLogo" width={50} height={50}  style={{ marginLeft: '10px' }} />
+                        </div>
                         <table>
                             <thead>
                                 <tr>
