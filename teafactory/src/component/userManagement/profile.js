@@ -87,7 +87,7 @@ const Profile = () => {
             </div>
             <div className="profile-info">
               <h2 className="profile-name">{userName}</h2>
-              <p className="profile-bio">Web Developer & Designer | Passionate about creating beautiful and interactive user experiences.</p>
+              <p className="profile-bio">Tea Factory Management Enthusiast | Dedicated to optimizing supply chain operations and enhancing production efficiency.</p>
               <div className="profile-links">
                 <button className="updateButton">Update</button>
                 <button className="deleteButton">Delete</button>

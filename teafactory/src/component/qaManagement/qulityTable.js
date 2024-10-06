@@ -41,7 +41,13 @@ const QuantityTable=({rows=[],selectedQulity,deleteQulity})=>{
 
                     <a href="#" class="QAbtn">View All</a>
                 </div>
-                <table className='table' ref={ComponentsRef}>
+                <div ref={ComponentsRef}>
+               
+                    <div className='LeafLink' style={{ display: 'flex', alignItems: 'center' }}>
+                        <h2 style={{ margin: 0,marginLeft:'40%' }} t>LeafLink </h2>
+                        <img src="/image/TeaFactoryLogo.png" alt="Company Logo" className="companyLogo" width={50} height={50}  style={{ marginLeft: '10px' }} />
+                    </div>
+                <table className='table' >
                     <thead>
                         <tr>
                             <th>Supplier Name</th>
@@ -77,6 +83,7 @@ const QuantityTable=({rows=[],selectedQulity,deleteQulity})=>{
 
                     </tbody>
                 </table>
+                </div>
                 <Button onClick={handlePrint} className="btn">Downlode Report</Button>
             </div>
         </div>

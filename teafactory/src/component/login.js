@@ -31,7 +31,7 @@ function Login() {
           const userType = result.data.userType; // Get userType from response
           switch (userType) {
             case 'Admin':
-              navigate('/admin-dashboard');
+              navigate('/admin');
               break;
             case 'Supplier':
               navigate('/supplier');
