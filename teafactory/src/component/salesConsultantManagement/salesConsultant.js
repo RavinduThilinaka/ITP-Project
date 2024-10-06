@@ -218,6 +218,15 @@ const Logout = () => {
                         <span class="title">Tea Factory</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="/profile">
+                        <span class="horizontal_box">
+                            <ion-icon icon={peopleOutline}></ion-icon>
+                        </span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li>
                 
 
                 <li>
