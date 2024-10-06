@@ -24,13 +24,14 @@ function Login() {
         console.log(result);
 
         if (result.data.message === "Success!!!") {
-          localStorage.setItem('userName', result.data.name); // Store user name
-          // localStorage.setItem('user', result.data); // Store user ID
-
+        localStorage.setItem('userName', result.data.name);
+        localStorage.setItem('userEmail', result.data.email);  // Save email
+        localStorage.setItem('userType', result.data.userType);  // Save user type
+        localStorage.setItem('userGender', result.data.gender); 
           const userType = result.data.userType; // Get userType from response
           switch (userType) {
             case 'Admin':
-              navigate('/admin-dashboard');
+              navigate('/admin');
               break;
             case 'Supplier':
               navigate('/supplier');
@@ -41,6 +42,10 @@ function Login() {
             case 'SalesConsaltent':
               navigate('/sales-consultant');
               break;
+            case 'Manager':
+              navigate('/service');
+              break;
+
             default:
               navigate('/'); // Default for 'User'
           }

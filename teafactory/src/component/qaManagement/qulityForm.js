@@ -157,7 +157,7 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
 
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}}>Date</Typography>
-                <div className="input"><input type="date" placeholder="Enter Date" value={checkDate} min={getCurrentDate()} onChange={e=>setDate(e.target.value)}></input></div>
+                <div className="input"><input type="date" placeholder="Enter Date" value={checkDate} min={getCurrentDate()} onChange={e=>setDate(e.target.value)} onFocus={(e) => e.target.showPicker()}></input></div>
                 {errors.checkDate && <Typography sx={{ color: "red" }}>{errors.checkDate}</Typography>}
         </Grid>
 

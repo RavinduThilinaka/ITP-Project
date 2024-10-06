@@ -12,11 +12,9 @@ function App() {
 
   const [userName, setUserName] = useState('');
   const navigate=useNavigate();
+  const [loading, setLoading] = useState(false); 
+  const [progress, setProgress] = useState(0); 
 
-  const Logout = () => {
-    localStorage.removeItem('userName');
-    navigate('/login');
-  };
 
   useEffect(() => {
     const name = localStorage.getItem('userName');
@@ -29,6 +27,23 @@ function App() {
     initializeSlider();
 }, []);
 
+const handleLogout = () => {
+  setLoading(true); // Set loading to true
+  setProgress(0); // Reset progress to 0
+  const interval = setInterval(() => {
+    setProgress((prev) => {
+      if (prev >= 100) {
+        clearInterval(interval);
+        localStorage.removeItem('userName'); // Remove userName from local storage
+        navigate('/login'); // Redirect to login page
+        setLoading(false); // Set loading to false
+        return 100; // Ensure progress is set to 100
+      }
+      return prev + 20; // Increment progress
+    });
+  }, 400); // Update every 400 ms
+};
+
     return (
       <div>
         <header>
@@ -37,18 +52,18 @@ function App() {
           </div>
           <nav>
               <Link to="/" className="nav-link"><FontAwesomeIcon icon={faHome} /> Home</Link>
-              <Link to="/" className="nav-link"><FontAwesomeIcon icon={faUser} /> Profile</Link>
+              <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faUser} /> Profile</Link>
               <Link to="/service" className="nav-link"><FontAwesomeIcon icon={faConciergeBell} /> Services</Link>
               <Link to="/contactus" className="nav-link"><FontAwesomeIcon icon={faEnvelope} /> Contact</Link>
               <Link to="/register" className="nav-link"><FontAwesomeIcon icon={faUserPlus} /> SignUp</Link>
               <Link to="/sales-consultant" className="nav-link"><FontAwesomeIcon icon={faEnvelope} /> Sales Consultant</Link>
               {userName ? (
-                 <>
-                  <span className="span-nav-link" onClick={Logout}><FontAwesomeIcon icon={faSignInAlt} /> Logout</span>
-                </>
-                  ) : (
-                    <Link to="/login" className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>
-                  )}
+            <>
+              <span className="span-nav-link" onClick={handleLogout}><FontAwesomeIcon icon={faSignInAlt} /> Logout</span>
+            </>
+          ) : (
+            <Link to="/login" className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>
+          )}
               
           </nav>
           <div className="logo">
@@ -56,6 +71,14 @@ function App() {
           </div>
 
         </header>
+
+           {/* Show loading spinner or message */}
+           {loading && (
+        <div className="loading">
+          <div className='p'>Logging out...</div>
+          <progress value={progress} max="100" className="progress-bar"></progress>
+        </div>
+      )}
   
         <div className="slider">
           

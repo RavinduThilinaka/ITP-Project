@@ -573,3 +573,13 @@ table tbody tr:nth-of-type(even) {
     font-weight: bold;
     cursor: pointer;
 }
+
+.LeafLink{
+    text-align: center;
+  font-size: 20px;
+  background: -webkit-linear-gradient(#2ecc71, #036a11); 
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+ 
+}

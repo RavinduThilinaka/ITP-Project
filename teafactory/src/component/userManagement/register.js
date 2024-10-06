@@ -7,7 +7,7 @@ import  { useEffect } from 'react';
 import './register.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { setupValidation } from './validation.js'; // 
+
 
 function Register(){
 
@@ -21,34 +21,57 @@ function Register(){
   const [secretKey,setSecretKey]=useState();
   const isValidTextChar = (char) => /^[A-Za-z\s]$/.test(char);
   const [confirmPassword, setConfirmPassword] = useState('');
-  const handleSubmit=(e)=>{
-    
+  const [nameError, setNameError] = useState('');
 
-    if((userType=="Admin" || userType=="Supplier"|| userType === "QaManager"|| userType === "SalesConsaltent") && secretKey!="teafactory"){
-      alert("You have not access this page!!")
-    }else{
+  const [errors, setErrors] = useState({});
 
-      e.preventDefault()
-   
-      axios.post('http://localhost:3001/api/registerUser',{name,email,gender,password,userType})
-        .then(result=>{
-          console.log(result)
-            navigate('/login')
-        })
-        .catch(error=>console.log(error))
+  // Validation rules
+  const validateName = (name) => /^[A-Za-z\s]+$/.test(name);
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validatePassword = (password) => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(password);
+  
 
-    }
-   
-  }
   const handleNameKeyPress = (e) => {
     if (!isValidTextChar(e.key)) {
         e.preventDefault();
+        setNameError('You can only use characters and spaces.');
     }
 };
 
-useEffect(() => {
-  setupValidation();
-}, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Client-side validation
+    let formErrors = {};
+    if (!validateName(name)) {
+      formErrors.name = 'Name must contain only letters and spaces';
+    }
+    if (!validateEmail(email)) {
+      formErrors.email = 'Invalid email address';
+    }
+    if (!validatePassword(password)) {
+      formErrors.password = 'Password must be at least 6 characters long, include uppercase, lowercase, and a number';
+    }
+    if (password !== confirmPassword) {
+      formErrors.confirmPassword = 'Passwords do not match';
+    }
+    if ((userType === 'Admin' || userType === 'Supplier' || userType === 'QaManager' || userType === 'SalesConsultant'|| userType === 'Manager') && secretKey !== 'teafactory') {
+      formErrors.secretKey = 'Incorrect secret key for this role';
+    }
+
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+    } else {
+      axios
+        .post('http://localhost:3001/api/registerUser', { name, email, gender, password, userType })
+        .then((result) => {
+          console.log(result);
+          navigate('/login');
+        })
+        .catch((error) => console.log(error));
+    }
+  };
+
 
     return(
       
@@ -69,18 +92,20 @@ useEffect(() => {
                         <option value="Supplier">Supplier</option>
                         <option value="QaManager">Qa Manager</option>
                         <option value="SalesConsaltent">Salase Consaltent</option>
+                        <option value="Manager">Manager</option>
                   </select>
               </div>
             
-            {userType=="Admin"|| userType === "Supplier"|| userType === "QaManager"|| userType === "SalesConsaltent"?(
+            {userType=="Admin"|| userType === "Supplier"|| userType === "QaManager"|| userType === "SalesConsaltent"|| userType === "Manager"?(
               <div className="input-field" >
               <i> <FontAwesomeIcon icon={faKey} /></i>
                 <input 
-                  type="text" 
+                  type="password" 
                   placeholder="Enter secret key" 
                   name="secretKey" 
                   onChange={(e)=>setSecretKey(e.target.value)}  
                   required />
+                  {errors.secretKey && <span style={{ color: 'red' }}>{errors.secretKey}</span>}
               </div>): null}
 
 
@@ -91,8 +116,9 @@ useEffect(() => {
                 placeholder="Enter your name" 
                 name="name" 
                 onChange={(e)=>setName(e.target.value)} 
-                onKeyPress={handleNameKeyPress} 
+               onKeyPress={handleNameKeyPress}
                 required />
+                 {errors.name && <span style={{ color: 'red' }}>{errors.name}</span>}
           </div>
 
           <div className="input-field">
@@ -104,6 +130,7 @@ useEffect(() => {
                 name="email"
                 onChange={(e)=>setEmail(e.target.value)} 
                 required />
+                 {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
           </div>
 
           <div className="input-field">
@@ -124,7 +151,7 @@ useEffect(() => {
                   name="password" 
                   onChange={(e)=>setPassowrd(e.target.value)} 
                   required />
-                <span style={{ color: 'red' }} id="pwdErr1"></span>
+                 {errors.password && <span style={{ color: 'red',marginLeft:"15%",marginTop:"45px"  }}>{errors.password}</span>}
           </div>
 
           <div className="input-field">
@@ -134,8 +161,9 @@ useEffect(() => {
                   placeholder="Confirm your password" 
                   id="pwd2" 
                   name="password2" 
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   required />
-                <span style={{ color: 'red' }} id="pwdErr2"></span>
+                {errors.confirmPassword && <span style={{ color: 'red',marginLeft:"15%",marginTop:"45px" }}>{errors.confirmPassword}</span>}
           </div><br />
 
             <p id="sms"></p>

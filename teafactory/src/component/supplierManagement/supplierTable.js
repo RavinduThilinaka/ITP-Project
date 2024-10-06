@@ -45,7 +45,14 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
 
                             <a href="#" class="btn">View All</a>
                         </div>
-                        <table ref={ComponentsRef}>
+
+                         
+                    <div className="logo_container" ref={ComponentsRef}>
+                        <div className='LeafLink' style={{ display: 'flex', alignItems: 'center' }}>
+                            <h2 style={{ margin: 0,marginLeft:'40%' }} t>LeafLink </h2>
+                            <img src="/image/TeaFactoryLogo.png" alt="Company Logo" className="companyLogo" width={50} height={50}  style={{ marginLeft: '10px' }} />
+                        </div>
+                        <table>
                             <thead>
                                 <tr>
                                     <th>Supplier Name</th>
@@ -64,7 +71,7 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
                                         <td>{row.quantity} Kg</td>
                                         <td>{row.teaType}</td>
                                         <td>{row.orderDate}</td>
-                                        <td>Rs.{row.price}</td>
+                                        <td>Rs.{parseFloat(row.price).toLocaleString()}</td>
                                         <td className="noPrint">
                                             <button className='updateBtn' onClick={()=>selectedSupplier({sId: row.sId,sName: row.sName ,quantity: row.quantity, teaType: row.teaType, orderDate: row.orderDate, price: row.price})}>Update</button>
                                             <button className='deleteBtn' onClick={()=>deleteSupplier({sId:row.sId})}>Delete</button>
