@@ -3,7 +3,8 @@ import './SupplierForm.css';
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-const { Container, Grid, Typography, Button } = require("@mui/material");
+
+const { Container, Grid, Typography, Button, Snackbar,Alert, IconButton } = require("@mui/material");
 
 const getCurrentDate = () => {
     const today = new Date();
@@ -34,6 +35,11 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
     const [quantityError, setQuantityError] = useState('');
     const [teaTypeError, setTeaTypeError] = useState('');
     const [orderDateError, setOrderDateError] = useState('');
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [loading, setLoading] = useState(false); // Loading state for progress indicator
+    const [successMessage, setSuccessMessage] = useState('');
+
 
     useEffect(()=>{
         if(!submitted){
@@ -134,10 +140,21 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
             }
     
 
-        if (sName && quantity && teaType && orderDate && validatePrice()) {
-            const numericPrice = price.replace(/,/g, '');
-            isEdit ? updateSupplier({ sId, sName, quantity, teaType, orderDate, price: numericPrice }) : addSupplier({ sId, sName, quantity, teaType, orderDate, price: numericPrice });
-        }
+            if (sName && quantity && teaType && orderDate && validatePrice()) {
+                const numericPrice = price.replace(/,/g, '');
+                if (isEdit) {
+                    updateSupplier({ sId, sName, quantity, teaType, orderDate, price: numericPrice });
+                    setSuccessMessage("Supplier updated successfully!");
+                } else {
+                    addSupplier({ sId, sName, quantity, teaType, orderDate, price: numericPrice });
+                    setSuccessMessage("Supplier added successfully!");
+                }
+                setOpenSnackbar(true); // Show Snackbar on successful submission
+            }
+    };
+
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
     };
    
 
@@ -227,8 +244,24 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
             </button>
            </Typography>
         </Grid>
+
+        <Snackbar
+                    open={openSnackbar}
+                    autoHideDuration={6000}
+                    onClose={handleCloseSnackbar}
+                    action={
+                        <IconButton size="small" aria-label="close" color="inherit" onClick={handleCloseSnackbar}>
+                       
+                        </IconButton>
+                    }
+                >
+                    <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%', backgroundColor: '#06402b', color: '#fff' }}>
+                        {successMessage}
+                    </Alert>
+                </Snackbar>
             
         </Grid>
+
     </Container>
     );
 
