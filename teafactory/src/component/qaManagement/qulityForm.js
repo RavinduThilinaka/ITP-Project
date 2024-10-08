@@ -22,7 +22,7 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
     const [leafType,setLeafType]=useState();
     const [moisturisingError, setMoisturisingError] = useState('');
     const [errors, setErrors] = useState({});
-
+    const [weightError, setWeightError] = useState('');
     useEffect(()=>{
         if(!submitted){
             const newId = Math.floor(Math.random() * 10000); // Example: Random ID between 0 and 9999
@@ -95,7 +95,21 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
         }
     };
 
+    const handleWeightChange = (e) => {
+        const value = e.target.value;
     
+        // Check for max length of 10 characters
+        if (value.length <= 10) {
+            if (value === '' || Number(value) >= 0) {
+                setWight(value);
+                setWeightError('');
+            } else {
+                setWeightError('Weight cannot be negative.'); // Set error if negative
+            }
+        } else {
+            setWeightError('Weight cannot exceed 10 characters.'); // Set error if too long
+        }
+    };
 
     return(
         <Container>
@@ -151,8 +165,8 @@ const QulityForm=({addQulity,submitted,data,isEdit,updateQulity})=>{
        
         <Grid item xs={6} sm={0}>
             <Typography sx={{fontSize:"20px"}}>Weight</Typography>
-                <div className="input"><input type="number" placeholder="Enter Weight" value={wight} onChange={e=>setWight(e.target.value)}></input></div>
-                {errors.weight && <Typography sx={{ color: "red" }}>{errors.weight}</Typography>}
+                <div className="input"><input type="number" placeholder="Enter Weight" value={wight}   maxLength={10}  min="0"onChange={handleWeightChange} ></input></div>
+                {weightError && <Typography sx={{ color: "red" }}>{weightError}</Typography>}
         </Grid>
 
         <Grid item xs={6} sm={0}>
