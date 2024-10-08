@@ -19,6 +19,7 @@ import ContactUs from './component/contactManagement/contact';
 import SalesConsultant from './component/salesConsultantManagement/salesConsultant';
 import Profile from './component/userManagement/profile';
 import AdminDashboard from './component/adminManagement/adminDashoboard';
+import Video from './vedio';
 
 
 
@@ -41,6 +42,7 @@ root.render(
       <Route path='/contactus' element={<ContactUs/>}/>
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/admin' element={<AdminDashboard/>}/>
+      <Route path='/vedio' element={<Video/>}/>
     </Routes>
 </BrowserRouter>
 );

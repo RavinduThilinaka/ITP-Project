@@ -119,7 +119,12 @@ const QuantityTable=({rows=[],selectedQulity,deleteQulity})=>{
                               }
 
                     </tbody>
-                </table>
+                </table><br></br>
+                <div className="signatureSection" style={{ marginTop: '20px', textAlign: 'center' }}>
+
+                    <div style={{ borderTop: '1px solid #000', width: '250px', margin: '20px auto',marginRight:'0px' }}>
+                        <span>Signature</span></div>
+                </div>
                 </div>
                 <Button onClick={handlePrint} className="btn">Downlode Report</Button>
             </div>

@@ -14,6 +14,11 @@ function App() {
   const navigate=useNavigate();
   const [loading, setLoading] = useState(false); 
   const [progress, setProgress] = useState(0); 
+ 
+
+  const handleSeeMoreClick = () => {
+    navigate('/vedio'); // Replace with the path you want to navigate to
+  };
 
 
   useEffect(() => {
@@ -99,7 +104,7 @@ const handleLogout = () => {
                 Relish the rich and smooth flavors of this premium black tea, harvested at peak freshness from the finest tea gardens. Each sip offers a deep, malty essence that warms the soul.
                 </div>
                 <div className="btn">
-                  <button>SEE MORE</button>
+                  <button  onClick={handleSeeMoreClick}>Watch Video</button>
                 </div>
               </div>
             </div>
