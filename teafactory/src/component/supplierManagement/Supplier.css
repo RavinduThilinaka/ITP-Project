@@ -583,3 +583,17 @@ table tbody tr:nth-of-type(even) {
   -webkit-text-fill-color: transparent; 
  
 }
+
+.curDate strong{
+    background: -webkit-linear-gradient(#565656, #000000); 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 15px;
+   
+}
+
+.linkLeafeAddress{
+    font-size: 15px;
+    font-weight: 500;
+}
