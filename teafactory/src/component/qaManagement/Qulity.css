@@ -277,3 +277,11 @@ h3 {
   .PieChart {
     background-color: #f0f0f0;
   }
+
+  .underline {
+    height: 2px;
+    background: #4CAF50; /* Change to your preferred color */
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
