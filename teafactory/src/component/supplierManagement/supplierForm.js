@@ -109,11 +109,15 @@ const SupplierForm=({addSupplier,submitted,data,isEdit,updateSupplier})=>{
     
     const handleQuantityChange = (e) => {
         const value = e.target.value;
-        if (parseFloat(value) < 0) {
-            setQuantityError('Quantity cannot be negative.');
+        if (value.length > 10) {
+            setQuantityError('Quantity cannot exceed 10 characters.');
         } else {
             setQuantityError('');
-            setQuantity(value);
+            if (parseFloat(value) < 0) {
+                setQuantityError('Quantity cannot be negative.');
+            } else {
+                setQuantity(value);
+            }
         }
     };
 
