@@ -122,6 +122,7 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
             <Typography variant="h4" sx={{ textAlign: "center", color: "#333", marginBottom: "20px", fontWeight: 700 }}>
                 Order Details
             </Typography>
+
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <TextField 
@@ -137,18 +138,30 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
                     {errors.sName && <Typography sx={{ color: "red" }}>{errors.sName}</Typography>}
                     {nameError && <Typography sx={{ color: "red" }}>{nameError}</Typography>} {/* Display name error */}
                 </Grid>
+                
                 <Grid item xs={12} sm={6}>
                     <TextField 
                         fullWidth 
                         label="Contact Number" 
-                        type="number" 
+                        type="tel" 
                         variant="outlined" 
                         value={contactNumber} 
-                        onChange={(e) => setContactNumber(e.target.value)} 
-                        error={!!errors.contactNumber}
-                        helperText={errors.contactNumber}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            // Allow only digits and ensure the length does not exceed 10 digits
+                            if (/^\d{0,10}$/.test(value)) {
+                                setContactNumber(value);
+                            }
+                        }}
+                        error={!!errors.contactNumber || (contactNumber && contactNumber.length !== 10)}
+                        helperText={
+                            errors.contactNumber 
+                            ? errors.contactNumber 
+                            : (contactNumber && contactNumber.length !== 10 ? 'Contact number must be exactly 10 digits.' : '')
+                        }
                     />
                 </Grid>
+
                 <Grid item xs={12} sm={6}>
                     <TextField 
                         fullWidth 
@@ -160,6 +173,7 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
                         helperText={errors.address}
                     />
                 </Grid>
+
                 <Grid item xs={12} sm={6}>
                     <TextField 
                         fullWidth 
@@ -173,6 +187,7 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
                     />
                      {quantityError && <Typography sx={{ color: "red" }}>{quantityError}</Typography>}
                 </Grid>
+
                 <Grid item xs={12} sm={6}>
                     <FormControl fullWidth error={!!errors.teaType}>
                         <InputLabel>Tea Type</InputLabel>
@@ -188,10 +203,11 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
                         </Select>
                         {errors.teaType && <Typography sx={{ color: "red", fontSize: "12px" }}>{errors.teaType}</Typography>}
                     </FormControl>
-                </Grid>
+            </Grid>
+
                 <Grid item xs={12} sm={6}>
                     <TextField 
-                        fullWidth 
+                        fullWidth
                         label="Order Date" 
                         type="date" 
                         variant="outlined" 
@@ -201,21 +217,34 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
                         error={!!errors.orderDate}
                         helperText={errors.orderDate}
                         inputProps={{ min: getCurrentDate() }}
+                        onFocus={(e) => e.target.showPicker()} // This will open the date picker on focus
                     />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField 
-                        fullWidth 
-                        label="Price (LKR)" 
-                        type="number" 
-                        variant="outlined" 
-                        value={price} 
-                        onChange={(e) => setPrice(e.target.value)}
-                        onKeyPress={handlePirceKeyPress} 
-                        error={!!errors.price}
-                        helperText={errors.price}
-                    />
-                </Grid>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+                <TextField 
+                    fullWidth 
+                    label="Price (LKR)" 
+                    type="text" 
+                    variant="outlined" 
+                    value={price} 
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        // Allow only positive numbers and no leading zeros, or allow the field to be empty
+                        if (value === '' || /^\d*\.?\d*$/.test(value)) {
+                            setPrice(value);
+                        }
+                    }}
+                    error={!!errors.price || (price && parseFloat(price) <= 0 && price !== '')}
+                    helperText={
+                        errors.price 
+                        ? errors.price 
+                        : (price && parseFloat(price) <= 0 && price !== '' ? 'Price must be greater than 0.' : '')
+                    }
+                />
+            </Grid>
+
+
             </Grid>
             <Grid container justifyContent="center" sx={{ marginTop: "30px" }}>
                 <Button 
