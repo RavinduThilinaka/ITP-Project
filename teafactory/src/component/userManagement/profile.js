@@ -74,7 +74,7 @@ const Profile = () => {
         
         <div className="card">
         <Link to="/" className="close-icon-link">
-              <span className="close-icon">✖</span>
+              
             </Link>
           {/* Date and Time Display */}
           <div className="date-time">{dateTime}
@@ -83,7 +83,7 @@ const Profile = () => {
               
           <div className="profile-header">
             <div className="profile-image">
-              <img src="/image/profile-img.jpg" alt="Profile" />
+              <img src="/image/NewProfile.jpg" alt="Profile" />
             </div>
             <div className="profile-info">
               <h2 className="profile-name">{userName}</h2>
