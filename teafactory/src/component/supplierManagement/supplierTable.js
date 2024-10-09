@@ -105,7 +105,7 @@ const SupplierTable=({rows=[],selectedSupplier,deleteSupplier})=>{
                                 filteredRows && filteredRows.length > 0 ? filteredRows.map(row=>(
                                     <tr key={row.sId}>
                                         <td>{row.sName}</td>
-                                        <td>{row.quantity} Kg</td>
+                                        <td>{new Intl.NumberFormat('en-US', { style: 'decimal', useGrouping: true }).format(row.quantity)} Kg</td>
                                         <td>{row.teaType}</td>
                                         <td>{row.orderDate}</td>
                                         <td>Rs.{parseFloat(row.price).toLocaleString()}</td>
