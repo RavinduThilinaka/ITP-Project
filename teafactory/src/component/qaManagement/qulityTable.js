@@ -101,7 +101,7 @@ const QuantityTable=({rows=[],selectedQulity,deleteQulity})=>{
                                     <tr key={row.qId}>
                                         <td>{row.sName}</td>
                                         <td>{row.moisturisingLevel}%</td>
-                                        <td>{row.wight} Kg</td>
+                                        <td>{new Intl.NumberFormat('en-US', { style: 'decimal', useGrouping: true }).format(row.wight)} Kg</td>
                                         <td>{row.checkDate}</td>
                                         <td>{row.leafType}</td>
                                         
