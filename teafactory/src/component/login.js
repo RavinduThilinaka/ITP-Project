@@ -65,7 +65,7 @@ function Login() {
             <form onSubmit={handleSubmit}>
              <i><h2><FontAwesomeIcon icon={faSignInAlt} ></FontAwesomeIcon>Login</h2></i><br/>
 
-            <div className="Animation" data-text="LOGIN">LOGIN</div>
+            
             <div className="user">
               <img src="/image/user.png" alt=''/>
             </div>
