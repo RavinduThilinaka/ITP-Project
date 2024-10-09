@@ -577,3 +577,10 @@ table tbody tr:nth-of-type(even) {
     text-align: center;
     font-size:20px;
 }
+.parent-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    height: 13vh;
+}

@@ -83,11 +83,11 @@ const Profile = () => {
               
           <div className="profile-header">
             <div className="profile-image">
-              <img src="/image/profile-img.jpg" alt="Profile" />
+              <img src="/image/Propic.jpeg" alt="Profile" />
             </div>
             <div className="profile-info">
               <h2 className="profile-name">{userName}</h2>
-              <p className="profile-bio">Tea Factory Management Enthusiast | Dedicated to optimizing supply chain operations and enhancing production efficiency.</p>
+              <p className="profile-bio">Sales Consultant | Passionate about building strong client relationships and delivering tailored solutions to meet customer needs.</p>
               <div className="profile-links">
                 <button className="updateButton">Update</button>
                 <button className="deleteButton">Delete</button>

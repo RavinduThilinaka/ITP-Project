@@ -30,7 +30,7 @@
 .profile-header {
     display: flex;
     padding: 30px;
-    background: linear-gradient(to right, #097b11, #24ea0e);
+    background: linear-gradient(to right, #103d13, #227919);
     color: white;
 }
 
@@ -360,4 +360,3 @@
     color: #e63946;
     transform: scale(1.2);
   }
-  

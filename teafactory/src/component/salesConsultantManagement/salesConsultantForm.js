@@ -110,12 +110,28 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = () => {
-        if (validateFields() && validatePrice()){
-            const orderData = { customerId, customerName, quantity, teaType, contactNumber, orderDate, price, address };
-            isEdit ? updateOrder(orderData) : addOrder(orderData);
-        }
-    };
+        // Function to format price with two decimal places
+        const formatPrice = (price) => {
+            const parsedPrice = parseFloat(price);
+            return isNaN(parsedPrice) ? '' : parsedPrice.toFixed(2); // 2 decimal places
+        };
+
+        const handleSubmit = () => {
+            if (validateFields() && validatePrice()) {
+                const formattedPrice = formatPrice(price); // Format the price before submitting
+                const orderData = { 
+                    customerId, 
+                    customerName, 
+                    quantity, 
+                    teaType, 
+                    contactNumber, 
+                    orderDate, 
+                    price: formattedPrice, // Use the formatted price here
+                    address 
+                };
+                isEdit ? updateOrder(orderData) : addOrder(orderData);
+            }
+        };
 
     return (
         <Container sx={{ padding: "20px", maxWidth: "800px", background: "linear-gradient(145deg, #f3f3f3, #e2e2e2)", borderRadius: "10px", boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)", marginTop: "30px" }}>
@@ -230,10 +246,14 @@ const SalesConsultantForm = ({ addOrder, submitted, data, isEdit, updateOrder })
                     value={price} 
                     onChange={(e) => {
                         const value = e.target.value;
-                        // Allow only positive numbers and no leading zeros, or allow the field to be empty
-                        if (value === '' || /^\d*\.?\d*$/.test(value)) {
+                        // Regular expression to match numbers with up to two decimal places
+                        if (value === '' || /^\d*\.?\d{0,2}$/.test(value)) { // Change Decimal places
                             setPrice(value);
                         }
+                    }}
+                    onBlur={() => {
+                        // Format and round the price to two decimal points when the input loses focus
+                        setPrice(formatPrice(price));
                     }}
                     error={!!errors.price || (price && parseFloat(price) <= 0 && price !== '')}
                     helperText={
