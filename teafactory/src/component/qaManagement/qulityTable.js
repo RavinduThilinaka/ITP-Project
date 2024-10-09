@@ -72,9 +72,9 @@ const QuantityTable=({rows=[],selectedQulity,deleteQulity})=>{
                 <div className="underline"></div>
                 <div ref={ComponentsRef}>
                 <div className='linkLeafeAddress'>
-                            LinkLeaf Tea Suppliers,<br />
-                            No. 123, Tea Street,<br />
-                            Colombo 7,<br />
+                            LinkLeaf Tea Qulity Teams,<br />
+                            No. 345, Tea Street,<br />
+                            Colombo 8,<br />
                             Sri Lanka.
                             <div className='curDate'><strong>{currentDate}</strong></div>
                         </div>

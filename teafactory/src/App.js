@@ -114,11 +114,9 @@ const handleLogout = () => {
               <div className="content">
                 <div className="title">Emerald Bliss</div>
                 <div className="type">GREEN TEA</div>
-                <div className="description">
-                  This green tea is crafted from the youngest, tender leaves, delivering a vibrant, refreshing taste. Its delicate balance of flavors invigorates your senses while promoting overall well-being.
-                </div>
+               
                 <div className="btn">
-                  <button>SEE MORE</button>
+                  <button style={{color:'black',fontWeight:'600'}}>SEE MORE</button>
                 </div>
               </div>
             </div>
@@ -127,12 +125,10 @@ const handleLogout = () => {
               <img src="./image/TeaLeaf2.jpg" alt=""/>
               <div className="content">
                 <div className="title">Sunrise Oolong </div>
-                <div className="type">OOLONG TEA</div>
-                <div className="description">
-                This semi-fermented tea brings the best of both worlds, offering the depth of black tea with the freshness of green tea. Each cup boasts a rich, complex flavor with notes of ripe fruits and honey.
-                </div>
+                <div className="type" >OOLONG TEA</div>
+               
                 <div className="btn">
-                  <button>SEE MORE</button>
+                  <button style={{color:'#fff',fontWeight:'600', borderColor:'#fff'}}>SEE MORE</button>
                 </div>
               </div>
             </div>
@@ -142,11 +138,9 @@ const handleLogout = () => {
               <div className="content">
                 <div className="title">Citrus Bloom</div>
                 <div className="type">HERBAL TEA</div>
-                <div className="description">
-                A harmonious blend of citrus and floral notes, this herbal tea is a delightful fusion of taste and aroma. It provides a soothing and rejuvenating experience, perfect for any time of day.
-                </div>
+               
                 <div className="btn">
-                  <button>SEE MORE</button>
+                  <button style={{color:'black',fontWeight:'600', borderColor:'#0b6408'}}>SEE MORE</button>
                 </div>
               </div>
             </div>
