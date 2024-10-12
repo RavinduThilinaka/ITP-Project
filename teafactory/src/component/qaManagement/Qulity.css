@@ -174,7 +174,7 @@
 }
 
 .QulityForm button {
-    background-color: #007bff;
+    background-color: #062c54;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -183,7 +183,7 @@
 }
 
 .QulityForm button:hover {
-    background-color: #0056b3;
+    background-color: #062c54;
 }
 
 /* Table Styles */
